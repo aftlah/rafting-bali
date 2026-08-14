@@ -1,7 +1,9 @@
-import { reviews } from '../data/site'
+import { useLanguage } from '../i18n/LanguageContext'
 import { section, sectionHead, sectionLead, sectionTitle } from '../lib/styles'
 
 export function Reviews() {
+  const { t } = useLanguage()
+
   return (
     <section
       className={`${section} bg-[linear-gradient(180deg,var(--color-mist),var(--color-foam))]`}
@@ -9,12 +11,12 @@ export function Reviews() {
     >
       <div className="container-site">
         <div className={sectionHead}>
-          <h2 className={sectionTitle}>Guests keep coming back</h2>
-          <p className={sectionLead}>Real notes from travelers who booked direct.</p>
+          <h2 className={sectionTitle}>{t.reviews.title}</h2>
+          <p className={sectionLead}>{t.reviews.lead}</p>
         </div>
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
-          {reviews.map((review) => (
+          {t.reviews.items.map((review) => (
             <blockquote
               key={review.name}
               className="m-0 border-t-2 border-river bg-white/55 p-6"

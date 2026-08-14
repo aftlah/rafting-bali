@@ -2,30 +2,36 @@
 
 Website marketing & booking untuk operator **white water rafting di Sungai Ayung, Ubud, Bali**.
 
-Situs ini menampilkan paket tur rafting, promo combo ATV, galeri aktivitas, testimoni, dan cara hubungi / booking — terutama lewat **WhatsApp**. Dibangun sebagai alternatif modern dari situs wisata WordPress yang umum: tampilan lebih bersih, fokus brand, dan alur booking yang lebih jelas.
+Situs ini menampilkan paket tur rafting, promo combo ATV, galeri aktivitas, testimoni, FAQ, peta lokasi, dan booking via **WhatsApp**. Tampilan modern dengan bahasa **EN / ID**.
 
-## Apa yang bisa dilakukan pengunjung
+## Fitur
 
-- Melihat **paket & harga** (own transport, transfer Ubud, transfer luar Ubud, combo ATV)
-- Membaca alasan booking (harga, bayar di tempat, booking mudah)
-- Memahami alur kegiatan hari itu (gear → rafting → lunch)
-- Melihat galeri & review
-- **Booking / inquiry** via WhatsApp atau form kontak
+- Landing page lengkap (hero, why us, packages, experience, gallery, reviews)
+- **Halaman detail paket** (`/packages/:id`) — itinerary, included/not included, usia, tangga, tingkat jeram
+- **FAQ** accordion
+- **Peta lokasi** Google Maps + petunjuk own transport
+- **Bahasa EN / ID** (toggle di navbar, tersimpan di localStorage)
+- **Analytics opsional** — Google Analytics 4 & Meta Pixel via `.env`
 
-## Untuk siapa
-
-- **Client / operator tur** — situs perusahaan untuk convert wisatawan jadi booking
-- **Traveler** — cari info paket Ayung rafting dan langsung chat untuk reservasi
-
-## Tech singkat
-
-React + TypeScript + Vite. Styling dengan **Tailwind CSS**. Konten & kontak diubah di `src/data/site.ts`.
-
-### Menjalankan lokal
+## Menjalankan lokal
 
 ```bash
 npm install
 npm run dev
 ```
 
-Build produksi: `npm run build` → folder `dist/`.
+```bash
+npm run build    # → dist/
+```
+
+## Konfigurasi
+
+| File | Isi |
+|------|-----|
+| `src/data/site.ts` | Kontak, harga, map URL, gambar |
+| `src/i18n/dictionaries.ts` | Semua teks EN & ID |
+| `.env` (dari `.env.example`) | `VITE_GA_MEASUREMENT_ID`, `VITE_META_PIXEL_ID` |
+
+## Tech
+
+React 19 · TypeScript · Vite · Tailwind CSS v4 · React Router

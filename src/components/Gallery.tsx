@@ -1,15 +1,16 @@
 import { images } from '../data/site'
+import { useLanguage } from '../i18n/LanguageContext'
 import { section, sectionHead, sectionLead, sectionTitle } from '../lib/styles'
 
 export function Gallery() {
+  const { t } = useLanguage()
+
   return (
     <section className={`${section} pb-[clamp(3rem,6vw,4rem)]`} id="gallery">
       <div className="container-site">
         <div className={sectionHead}>
-          <h2 className={sectionTitle}>On the water</h2>
-          <p className={sectionLead}>
-            Moments from the gorge — replace these placeholders with your own shoot.
-          </p>
+          <h2 className={sectionTitle}>{t.gallery.title}</h2>
+          <p className={sectionLead}>{t.gallery.lead}</p>
         </div>
       </div>
 
@@ -18,14 +19,10 @@ export function Gallery() {
         role="list"
       >
         {images.gallery.map((src, i) => (
-          <figure
-            key={src}
-            role="listitem"
-            className="aspect-4/5 snap-start overflow-hidden"
-          >
+          <figure key={src} role="listitem" className="aspect-4/5 snap-start overflow-hidden">
             <img
               src={src}
-              alt={`Ayung rafting gallery ${i + 1}`}
+              alt={`${t.gallery.alt} ${i + 1}`}
               loading="lazy"
               width={1200}
               height={900}

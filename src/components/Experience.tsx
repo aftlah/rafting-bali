@@ -1,19 +1,19 @@
-import { steps } from '../data/site'
+import { useLanguage } from '../i18n/LanguageContext'
 import { section, sectionHead, sectionLead, sectionTitle } from '../lib/styles'
 
 export function Experience() {
+  const { t } = useLanguage()
+
   return (
     <section className={`${section} bg-forest text-foam`} id="experience">
       <div className="container-site">
         <div className={sectionHead}>
-          <h2 className={`${sectionTitle} text-white`}>How the day flows</h2>
-          <p className={`${sectionLead} text-foam/72`}>
-            One clear path from briefing to the final paddle — no guesswork.
-          </p>
+          <h2 className={`${sectionTitle} text-white`}>{t.experience.title}</h2>
+          <p className={`${sectionLead} text-foam/72`}>{t.experience.lead}</p>
         </div>
 
         <ol className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {steps.map((step) => (
+          {t.experience.steps.map((step) => (
             <li key={step.n} className="border-t border-line-light pt-5">
               <span className="mb-3 block font-display text-3xl text-mint">{step.n}</span>
               <h3 className="mb-2 font-display text-[1.45rem] font-semibold">{step.title}</h3>

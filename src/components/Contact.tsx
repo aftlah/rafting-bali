@@ -7,6 +7,7 @@ import {
   PHONE_DISPLAY,
   waLink,
 } from '../data/site'
+import { useLanguage } from '../i18n/LanguageContext'
 import {
   btnDark,
   btnPrimary,
@@ -20,6 +21,7 @@ const field =
   'w-full rounded-md border border-line bg-white px-3.5 py-3 font-sans text-ink focus:border-river focus:outline-2 focus:outline-river/35'
 
 export function Contact() {
+  const { t } = useLanguage()
   const [sent, setSent] = useState(false)
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -32,11 +34,11 @@ export function Contact() {
     const note = String(data.get('note') || '').trim()
 
     const message = [
-      `Hi! Booking inquiry from ${name || 'a guest'}.`,
-      date && `Date: ${date}`,
-      pax && `Guests: ${pax}`,
-      hotel && `Hotel: ${hotel}`,
-      note && `Note: ${note}`,
+      `${t.contact.inquiryPrefix} ${name || '—'}.`,
+      date && `${t.contact.inquiryDate}: ${date}`,
+      pax && `${t.contact.inquiryGuests}: ${pax}`,
+      hotel && `${t.contact.inquiryHotel}: ${hotel}`,
+      note && `${t.contact.inquiryNote}: ${note}`,
     ]
       .filter(Boolean)
       .join('\n')
@@ -50,17 +52,14 @@ export function Contact() {
       <div className="container-site grid grid-cols-1 items-start gap-[clamp(2rem,5vw,4rem)] lg:grid-cols-[1fr_1.05fr]">
         <div>
           <div className={sectionHead}>
-            <h2 className={sectionTitle}>Ready when you are</h2>
-            <p className={sectionLead}>
-              Chat on WhatsApp for the fastest confirmation — or send a quick
-              inquiry and we’ll reply with availability.
-            </p>
+            <h2 className={sectionTitle}>{t.contact.title}</h2>
+            <p className={sectionLead}>{t.contact.lead}</p>
           </div>
 
           <ul className="mb-6 grid gap-5">
             <li>
               <span className="mb-1 block text-[0.75rem] font-bold tracking-wider text-river uppercase">
-                WhatsApp / Phone
+                {t.contact.phone}
               </span>
               <a
                 className="block font-medium text-forest"
@@ -77,7 +76,7 @@ export function Contact() {
             </li>
             <li>
               <span className="mb-1 block text-[0.75rem] font-bold tracking-wider text-river uppercase">
-                Email
+                {t.contact.email}
               </span>
               <a className="block font-medium text-forest" href={`mailto:${EMAIL}`}>
                 {EMAIL}
@@ -85,7 +84,7 @@ export function Contact() {
             </li>
             <li>
               <span className="mb-1 block text-[0.75rem] font-bold tracking-wider text-river uppercase">
-                Activity base
+                {t.contact.base}
               </span>
               <p className="font-medium text-forest">{ADDRESS}</p>
             </li>
@@ -93,36 +92,33 @@ export function Contact() {
 
           <a
             className={btnPrimary}
-            href={waLink('Hi! I have a question about Ayung Rafting.')}
+            href={waLink(t.waQuestion)}
             target="_blank"
             rel="noreferrer"
           >
-            Chat on WhatsApp
+            {t.contact.chat}
           </a>
         </div>
 
-        <form
-          className="grid gap-3.5 border border-line bg-foam p-6"
-          onSubmit={onSubmit}
-        >
+        <form className="grid gap-3.5 border border-line bg-foam p-6" onSubmit={onSubmit}>
           <label className="grid gap-1.5 text-[0.85rem] font-semibold text-forest">
-            Name
+            {t.contact.name}
             <input
               className={field}
               name="name"
               type="text"
               required
               autoComplete="name"
-              placeholder="Your name"
+              placeholder={t.contact.namePh}
             />
           </label>
           <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
             <label className="grid gap-1.5 text-[0.85rem] font-semibold text-forest">
-              Preferred date
+              {t.contact.date}
               <input className={field} name="date" type="date" required />
             </label>
             <label className="grid gap-1.5 text-[0.85rem] font-semibold text-forest">
-              Guests
+              {t.contact.guests}
               <input
                 className={field}
                 name="pax"
@@ -135,25 +131,25 @@ export function Contact() {
             </label>
           </div>
           <label className="grid gap-1.5 text-[0.85rem] font-semibold text-forest">
-            Hotel / area
+            {t.contact.hotel}
             <input
               className={field}
               name="hotel"
               type="text"
-              placeholder="Ubud / Seminyak / …"
+              placeholder={t.contact.hotelPh}
             />
           </label>
           <label className="grid gap-1.5 text-[0.85rem] font-semibold text-forest">
-            Message
+            {t.contact.message}
             <textarea
               className={field}
               name="note"
               rows={4}
-              placeholder="Package preference, pickup time…"
+              placeholder={t.contact.notePh}
             />
           </label>
           <button className={`${btnDark} mt-1.5 w-full`} type="submit">
-            {sent ? 'Opening WhatsApp…' : 'Send inquiry'}
+            {sent ? t.contact.sending : t.contact.send}
           </button>
         </form>
       </div>

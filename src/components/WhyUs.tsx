@@ -1,4 +1,4 @@
-import { reasons } from '../data/site'
+import { useLanguage } from '../i18n/LanguageContext'
 import { section, sectionHead, sectionLead, sectionTitle } from '../lib/styles'
 
 const icons = {
@@ -10,12 +10,7 @@ const icons = {
         strokeWidth="2"
         strokeLinejoin="round"
       />
-      <path
-        d="M18 14V10h12v4"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+      <path d="M18 14V10h12v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
       <circle cx="24" cy="28" r="4" stroke="currentColor" strokeWidth="2" />
     </svg>
   ),
@@ -40,6 +35,8 @@ const icons = {
 } as const
 
 export function WhyUs() {
+  const { t } = useLanguage()
+
   return (
     <section
       className={`${section} bg-white py-[clamp(3.5rem,8vw,5rem)]`}
@@ -49,16 +46,16 @@ export function WhyUs() {
       <div className="container-site">
         <div className={`${sectionHead} mx-auto text-center`}>
           <h2 id="why-heading" className={sectionTitle}>
-            Why choose us
+            {t.why.title}
           </h2>
-          <p className={sectionLead}>A few good reasons to book direct</p>
+          <p className={sectionLead}>{t.why.lead}</p>
         </div>
 
         <ul className="grid grid-cols-1 gap-[clamp(1.5rem,4vw,2.5rem)] md:grid-cols-3">
-          {reasons.map((reason) => (
+          {t.why.items.map((reason) => (
             <li key={reason.id} className="mx-auto max-w-72 text-center">
               <span className="mb-4 inline-flex size-14 items-center justify-center rounded-full bg-foam text-river">
-                {icons[reason.id]}
+                {icons[reason.id as keyof typeof icons]}
               </span>
               <h3 className="mb-1.5 font-display text-[1.35rem] font-semibold text-forest">
                 {reason.title}

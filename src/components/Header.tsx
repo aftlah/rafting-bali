@@ -26,20 +26,72 @@ export function Header() {
     }
   }, [open])
 
-  return (
-    <header className={`header ${scrolled || open ? 'header--solid' : ''}`}>
-      <div className="container header__inner">
-        <a href="#top" className="header__brand" onClick={() => setOpen(false)}>
-          <span className="header__mark" aria-hidden="true" />
-          <span>
-            Ubud Ayung
-            <em>Rafting</em>
-          </span>
-        </a>
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
-        <nav className={`header__nav ${open ? 'is-open' : ''}`} aria-label="Primary">
+  const solid = scrolled || open
+
+  return (
+    <header className={`header ${solid ? 'header--solid' : ''} ${open ? 'header--open' : ''}`}>
+      <div className="header__bar">
+        <div className="container header__inner">
+          <a href="#top" className="header__brand" onClick={() => setOpen(false)}>
+            <span className="header__mark" aria-hidden="true" />
+            <span className="header__brand-text">
+              Ubud Ayung
+              <em>Rafting</em>
+            </span>
+          </a>
+
+          <nav className="header__nav" aria-label="Primary">
+            {links.map((link) => (
+              <a key={link.href} href={link.href}>
+                {link.label}
+              </a>
+            ))}
+            <a
+              className="btn btn-primary header__cta"
+              href={waLink('Hi! I want to book Ayung Rafting.')}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Book via WhatsApp
+            </a>
+          </nav>
+
+          <button
+            type="button"
+            className={`header__toggle ${open ? 'is-open' : ''}`}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="mobile-menu"
+        className={`header__panel ${open ? 'is-open' : ''}`}
+        aria-hidden={!open}
+      >
+        <nav className="header__panel-nav" aria-label="Mobile">
           {links.map((link) => (
-            <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+            <a
+              key={link.href}
+              href={link.href}
+              tabIndex={open ? 0 : -1}
+              onClick={() => setOpen(false)}
+            >
               {link.label}
             </a>
           ))}
@@ -48,22 +100,12 @@ export function Header() {
             href={waLink('Hi! I want to book Ayung Rafting.')}
             target="_blank"
             rel="noreferrer"
+            tabIndex={open ? 0 : -1}
             onClick={() => setOpen(false)}
           >
             Book via WhatsApp
           </a>
         </nav>
-
-        <button
-          type="button"
-          className={`header__toggle ${open ? 'is-open' : ''}`}
-          aria-expanded={open}
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span />
-          <span />
-        </button>
       </div>
     </header>
   )

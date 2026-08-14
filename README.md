@@ -1,75 +1,31 @@
-# React + TypeScript + Vite
+# Ubud Ayung Rafting
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website marketing & booking untuk operator **white water rafting di Sungai Ayung, Ubud, Bali**.
 
-Currently, two official plugins are available:
+Situs ini menampilkan paket tur rafting, promo combo ATV, galeri aktivitas, testimoni, dan cara hubungi / booking — terutama lewat **WhatsApp**. Dibangun sebagai alternatif modern dari situs wisata WordPress yang umum: tampilan lebih bersih, fokus brand, dan alur booking yang lebih jelas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Apa yang bisa dilakukan pengunjung
 
-## React Compiler
+- Melihat **paket & harga** (own transport, transfer Ubud, transfer luar Ubud, combo ATV)
+- Membaca alasan booking (harga, bayar di tempat, booking mudah)
+- Memahami alur kegiatan hari itu (gear → rafting → lunch)
+- Melihat galeri & review
+- **Booking / inquiry** via WhatsApp atau form kontak
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Untuk siapa
 
-## Expanding the ESLint configuration
+- **Client / operator tur** — situs perusahaan untuk convert wisatawan jadi booking
+- **Traveler** — cari info paket Ayung rafting dan langsung chat untuk reservasi
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech singkat
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+React + TypeScript + Vite. Konten & kontak diubah di `src/data/site.ts`.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Menjalankan lokal
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+Build produksi: `npm run build` → folder `dist/`.

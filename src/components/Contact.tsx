@@ -7,6 +7,17 @@ import {
   PHONE_DISPLAY,
   waLink,
 } from '../data/site'
+import {
+  btnDark,
+  btnPrimary,
+  section,
+  sectionHead,
+  sectionLead,
+  sectionTitle,
+} from '../lib/styles'
+
+const field =
+  'w-full rounded-md border border-line bg-white px-3.5 py-3 font-sans text-ink focus:border-river focus:outline-2 focus:outline-river/35'
 
 export function Contact() {
   const [sent, setSent] = useState(false)
@@ -35,35 +46,53 @@ export function Contact() {
   }
 
   return (
-    <section className="section contact" id="contact">
-      <div className="container contact__grid">
-        <div className="contact__info">
-          <div className="section-head">
-            <h2>Ready when you are</h2>
-            <p>
+    <section className={`${section} bg-white`} id="contact">
+      <div className="container-site grid grid-cols-1 items-start gap-[clamp(2rem,5vw,4rem)] lg:grid-cols-[1fr_1.05fr]">
+        <div>
+          <div className={sectionHead}>
+            <h2 className={sectionTitle}>Ready when you are</h2>
+            <p className={sectionLead}>
               Chat on WhatsApp for the fastest confirmation — or send a quick
               inquiry and we’ll reply with availability.
             </p>
           </div>
 
-          <ul className="contact__list">
+          <ul className="mb-6 grid gap-5">
             <li>
-              <span>WhatsApp / Phone</span>
-              <a href={`tel:${PHONE_DISPLAY.replace(/\s|-/g, '')}`}>{PHONE_DISPLAY}</a>
-              <a href={`tel:${PHONE_ALT.replace(/\s|-/g, '')}`}>{PHONE_ALT}</a>
+              <span className="mb-1 block text-[0.75rem] font-bold tracking-wider text-river uppercase">
+                WhatsApp / Phone
+              </span>
+              <a
+                className="block font-medium text-forest"
+                href={`tel:${PHONE_DISPLAY.replace(/\s|-/g, '')}`}
+              >
+                {PHONE_DISPLAY}
+              </a>
+              <a
+                className="mt-0.5 block font-medium text-forest"
+                href={`tel:${PHONE_ALT.replace(/\s|-/g, '')}`}
+              >
+                {PHONE_ALT}
+              </a>
             </li>
             <li>
-              <span>Email</span>
-              <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+              <span className="mb-1 block text-[0.75rem] font-bold tracking-wider text-river uppercase">
+                Email
+              </span>
+              <a className="block font-medium text-forest" href={`mailto:${EMAIL}`}>
+                {EMAIL}
+              </a>
             </li>
             <li>
-              <span>Activity base</span>
-              <p>{ADDRESS}</p>
+              <span className="mb-1 block text-[0.75rem] font-bold tracking-wider text-river uppercase">
+                Activity base
+              </span>
+              <p className="font-medium text-forest">{ADDRESS}</p>
             </li>
           </ul>
 
           <a
-            className="btn btn-primary"
+            className={btnPrimary}
             href={waLink('Hi! I have a question about Ayung Rafting.')}
             target="_blank"
             rel="noreferrer"
@@ -72,30 +101,58 @@ export function Contact() {
           </a>
         </div>
 
-        <form className="contact__form" onSubmit={onSubmit}>
-          <label>
+        <form
+          className="grid gap-3.5 border border-line bg-foam p-6"
+          onSubmit={onSubmit}
+        >
+          <label className="grid gap-1.5 text-[0.85rem] font-semibold text-forest">
             Name
-            <input name="name" type="text" required autoComplete="name" placeholder="Your name" />
+            <input
+              className={field}
+              name="name"
+              type="text"
+              required
+              autoComplete="name"
+              placeholder="Your name"
+            />
           </label>
-          <div className="contact__row">
-            <label>
+          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+            <label className="grid gap-1.5 text-[0.85rem] font-semibold text-forest">
               Preferred date
-              <input name="date" type="date" required />
+              <input className={field} name="date" type="date" required />
             </label>
-            <label>
+            <label className="grid gap-1.5 text-[0.85rem] font-semibold text-forest">
               Guests
-              <input name="pax" type="number" min={1} max={40} required placeholder="2" />
+              <input
+                className={field}
+                name="pax"
+                type="number"
+                min={1}
+                max={40}
+                required
+                placeholder="2"
+              />
             </label>
           </div>
-          <label>
+          <label className="grid gap-1.5 text-[0.85rem] font-semibold text-forest">
             Hotel / area
-            <input name="hotel" type="text" placeholder="Ubud / Seminyak / …" />
+            <input
+              className={field}
+              name="hotel"
+              type="text"
+              placeholder="Ubud / Seminyak / …"
+            />
           </label>
-          <label>
+          <label className="grid gap-1.5 text-[0.85rem] font-semibold text-forest">
             Message
-            <textarea name="note" rows={4} placeholder="Package preference, pickup time…" />
+            <textarea
+              className={field}
+              name="note"
+              rows={4}
+              placeholder="Package preference, pickup time…"
+            />
           </label>
-          <button className="btn btn-dark" type="submit">
+          <button className={`${btnDark} mt-1.5 w-full`} type="submit">
             {sent ? 'Opening WhatsApp…' : 'Send inquiry'}
           </button>
         </form>

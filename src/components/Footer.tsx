@@ -4,17 +4,27 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="footer">
-      <div className="container footer__inner">
+    <footer className="bg-forest px-0 py-10 text-foam/75">
+      <div className="container-site flex flex-wrap justify-between gap-6">
         <div>
-          <p className="footer__brand">
-            Ubud Ayung <em>Rafting</em>
+          <p className="font-bold tracking-tight text-white">
+            Ubud Ayung{' '}
+            <em className="font-display not-italic text-mint">Rafting</em>
           </p>
-          <p className="footer__tag">White water rafting in the heart of Bali.</p>
+          <p className="mt-1.5 text-[0.92rem]">
+            White water rafting in the heart of Bali.
+          </p>
         </div>
-        <div className="footer__meta">
-          <a href={`tel:${PHONE_DISPLAY.replace(/\s|-/g, '')}`}>{PHONE_DISPLAY}</a>
-          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        <div className="grid gap-1.5 text-left text-[0.92rem] lg:text-right">
+          <a
+            className="hover:text-white"
+            href={`tel:${PHONE_DISPLAY.replace(/\s|-/g, '')}`}
+          >
+            {PHONE_DISPLAY}
+          </a>
+          <a className="hover:text-white" href={`mailto:${EMAIL}`}>
+            {EMAIL}
+          </a>
           <p>© {year} Ubud Ayung Rafting. Made in Bali.</p>
         </div>
       </div>

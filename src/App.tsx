@@ -7,7 +7,6 @@ import { Hero } from './components/Hero'
 import { Packages } from './components/Packages'
 import { Reviews } from './components/Reviews'
 import { WhyUs } from './components/WhyUs'
-import './App.css'
 
 function App() {
   return (

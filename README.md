@@ -19,7 +19,7 @@ Situs ini menampilkan paket tur rafting, promo combo ATV, galeri aktivitas, test
 
 ## Tech singkat
 
-React + TypeScript + Vite. Konten & kontak diubah di `src/data/site.ts`.
+React + TypeScript + Vite. Styling dengan **Tailwind CSS**. Konten & kontak diubah di `src/data/site.ts`.
 
 ### Menjalankan lokal
 

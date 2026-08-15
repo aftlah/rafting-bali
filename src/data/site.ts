@@ -45,44 +45,44 @@ export type GalleryItem = {
   category: GalleryCategory
 }
 
-/** Placeholder imagery — replace with client ATV photos before launch */
+/** Placeholder ATV imagery — replace with client photos before launch */
 export const images = {
-  hero: 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=2400&q=80',
+  hero: 'https://images.unsplash.com/photo-1496521061024-90e1c1221555?auto=format&fit=crop&w=2400&q=80',
   combo:
-    'https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&w=1600&q=80',
+    'https://images.unsplash.com/photo-1582959746698-660400376dd6?auto=format&fit=crop&w=1600&q=80',
   about:
-    'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=1600&q=80',
+    'https://images.unsplash.com/photo-1507621320306-87a4aac1816c?auto=format&fit=crop&w=1600&q=80',
   gallery: [
     {
-      src: 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1200&q=80',
+      src: 'https://images.unsplash.com/photo-1496521061024-90e1c1221555?auto=format&fit=crop&w=1200&q=80',
       category: 'atv',
     },
     {
-      src: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?auto=format&fit=crop&w=1200&q=80',
-      category: 'trail',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
-      category: 'trail',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
-      category: 'beach',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1200&q=80',
-      category: 'beach',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80',
+      src: 'https://images.unsplash.com/photo-1507621320306-87a4aac1816c?auto=format&fit=crop&w=1200&q=80',
       category: 'atv',
     },
     {
-      src: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
+      src: 'https://images.unsplash.com/photo-1582959746698-660400376dd6?auto=format&fit=crop&w=1200&q=80',
       category: 'trail',
     },
     {
-      src: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80',
+      src: 'https://images.unsplash.com/photo-1612118756064-5403ff7747de?auto=format&fit=crop&w=1200&q=80',
+      category: 'trail',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1713472850797-96ef549ba6af?auto=format&fit=crop&w=1200&q=80',
+      category: 'trail',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1721343431343-1a0241c07a2f?auto=format&fit=crop&w=1200&q=80',
+      category: 'beach',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1734410117891-bd6b5c61177e?auto=format&fit=crop&w=1200&q=80',
+      category: 'beach',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1506408334286-246f3e68526c?auto=format&fit=crop&w=1200&q=80',
       category: 'atv',
     },
   ] satisfies GalleryItem[],

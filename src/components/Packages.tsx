@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { comboMeta, packageIds, packageMeta, waLink } from '../data/site'
+import { comboMeta, images, packageIds, packageMeta, waLink } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import {
   btnDark,
@@ -107,7 +107,12 @@ export function Packages() {
           })}
         </div>
 
-        <aside className="mt-6 grid min-h-72 items-end bg-[linear-gradient(120deg,rgba(10,36,32,0.88)_0%,rgba(10,36,32,0.45)_55%,rgba(10,36,32,0.2)_100%),url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center p-[clamp(1.5rem,4vw,2.5rem)] text-white">
+        <aside
+          className="mt-6 grid min-h-72 items-end bg-cover bg-center p-[clamp(1.5rem,4vw,2.5rem)] text-white"
+          style={{
+            backgroundImage: `linear-gradient(120deg, rgba(10,36,32,0.88) 0%, rgba(10,36,32,0.45) 55%, rgba(10,36,32,0.2) 100%), url('${images.combo}')`,
+          }}
+        >
           <div>
             <p className="mb-2 text-[0.75rem] font-bold tracking-widest text-mint uppercase">
               {t.packages.combo.label}

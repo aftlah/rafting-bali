@@ -2,16 +2,14 @@ import { useLanguage } from '../i18n/LanguageContext'
 import { section, sectionHead, sectionLead, sectionTitle } from '../lib/styles'
 
 const icons = {
-  price: (
+  memorable: (
     <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="size-7">
       <path
-        d="M18 14h16l4 8v14H14V22l4-8Z"
+        d="M24 8l3.5 10.5H38l-8.5 6.2 3.3 10.3L24 29.2l-8.8 5.8 3.3-10.3L10 18.5h10.5L24 8Z"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinejoin="round"
       />
-      <path d="M18 14V10h12v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <circle cx="24" cy="28" r="4" stroke="currentColor" strokeWidth="2" />
     </svg>
   ),
   payment: (

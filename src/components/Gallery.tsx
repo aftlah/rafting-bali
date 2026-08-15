@@ -16,9 +16,9 @@ export function Gallery() {
 
   const filters: { id: Filter; label: string }[] = [
     { id: 'all', label: t.gallery.filters.all },
-    { id: 'rafting', label: t.gallery.filters.rafting },
-    { id: 'nature', label: t.gallery.filters.nature },
-    { id: 'facilities', label: t.gallery.filters.facilities },
+    { id: 'atv', label: t.gallery.filters.atv },
+    { id: 'trail', label: t.gallery.filters.trail },
+    { id: 'beach', label: t.gallery.filters.beach },
   ]
 
   const items = useMemo(

@@ -19,17 +19,24 @@ export function LocationMap() {
           </p>
           <p className="mb-6 font-medium text-forest">{ADDRESS}</p>
 
-          <h3 className="mb-2 font-display text-xl font-semibold text-forest">
-            {t.location.ownTransportTitle}
+          <h3 className="mb-3 font-display text-xl font-semibold text-forest">
+            {t.location.areasTitle}
           </h3>
-          <p className="mb-6 max-w-prose text-muted">{t.location.ownTransportText}</p>
+          <ul className="mb-6 grid gap-3">
+            {t.location.areas.map((area) => (
+              <li key={area.name} className="border-l-2 border-river pl-3">
+                <p className="font-semibold text-forest">{area.name}</p>
+                <p className="text-sm text-muted">{area.text}</p>
+              </li>
+            ))}
+          </ul>
 
-          <a
-            className={btnOutline}
-            href={MAP_LINK}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <h3 className="mb-2 font-display text-xl font-semibold text-forest">
+            {t.location.tipTitle}
+          </h3>
+          <p className="mb-6 max-w-prose text-muted">{t.location.tipText}</p>
+
+          <a className={btnOutline} href={MAP_LINK} target="_blank" rel="noreferrer">
             {t.location.openMaps}
           </a>
         </div>

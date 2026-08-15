@@ -1,19 +1,16 @@
 # Wild ATV Bali
 
-Website marketing & booking untuk **Wild ATV Bali** — petualangan ATV dan white water rafting di Bali (termasuk Sungai Ayung, Ubud).
+Website marketing & booking untuk **Wild ATV Bali** — tur ATV quad bike di Ubud (North/South) dan pantai, plus combo ATV + rafting.
 
-Situs ini menampilkan paket tur, promo combo ATV + rafting, galeri, testimoni, FAQ, peta lokasi, dan booking via **WhatsApp**. Tampilan modern dengan bahasa **EN / ID**.
+Data paket & kontak disesuaikan dari referensi [baliatvubud.com](https://www.baliatvubud.com/).
 
 ## Fitur
 
-- Landing page lengkap (hero, trust bar, why us, packages, experience, gallery, reviews)
-- **Halaman detail paket** (`/packages/:id`) — itinerary, included/not included, usia, tangga, tingkat jeram
-- **About & safety** (`/about`) — tim, keselamatan, peralatan
-- **Gallery** filter + lightbox
-- **FAQ** accordion + **peta lokasi**
-- Sticky **WhatsApp** button
-- **Bahasa EN / ID** (toggle di navbar)
-- **Analytics opsional** — GA4 & Meta Pixel via `.env`
+- Landing page ATV (hero, trust, why us, packages, experience, gallery, reviews)
+- Paket: **North Ubud**, **South Ubud**, **Beach** + combo rafting
+- Detail paket, About & safety, FAQ, lokasi, sticky WhatsApp
+- Bahasa **EN / ID**
+- Analytics opsional via `.env`
 
 ## Menjalankan lokal
 
@@ -22,17 +19,13 @@ npm install
 npm run dev
 ```
 
-```bash
-npm run build    # → dist/
-```
-
 ## Konfigurasi
 
 | File | Isi |
 |------|-----|
-| `src/data/site.ts` | Kontak, harga, map URL, gambar |
-| `src/i18n/dictionaries.ts` | Semua teks EN & ID |
-| `.env` (dari `.env.example`) | `VITE_GA_MEASUREMENT_ID`, `VITE_META_PIXEL_ID` |
+| `src/data/site.ts` | Kontak, harga, map, gambar |
+| `src/i18n/dictionaries.ts` | Teks EN & ID |
+| `.env` | GA / Meta Pixel IDs |
 
 ## Tech
 

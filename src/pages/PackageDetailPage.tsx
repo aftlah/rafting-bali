@@ -4,7 +4,7 @@ import { packageMeta, waLink, type PackageId } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import { btnPrimary, section } from '../lib/styles'
 
-const ids: PackageId[] = ['own-transport', 'ubud-transfer', 'outside-ubud']
+const ids: PackageId[] = ['north-ubud', 'south-ubud', 'beach']
 
 function isPackageId(id: string | undefined): id is PackageId {
   return !!id && ids.includes(id as PackageId)
@@ -135,9 +135,9 @@ export function PackageDetailPage() {
               </div>
               <div>
                 <dt className="text-xs font-bold tracking-wider text-river uppercase">
-                  {d.stairs}
+                  {d.note}
                 </dt>
-                <dd className="mt-1 text-forest">{d.facts.stairs}</dd>
+                <dd className="mt-1 text-forest">{d.facts.note}</dd>
               </div>
             </dl>
           </div>

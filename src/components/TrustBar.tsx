@@ -9,7 +9,7 @@ export function TrustBar() {
       <div className="container-site grid grid-cols-1 gap-6 py-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4 lg:py-10">
         {t.trust.items.map((item) => {
           let text = item.text
-          if (item.id === 'nib') text = `NIB ${NIB} · ${COMPANY}`
+          if (item.id === 'nib' && NIB) text = `NIB ${NIB} · ${COMPANY}`
           if (item.id === 'rating') text = `${RATING} / 5 · ${REVIEW_COUNT}`
 
           return (

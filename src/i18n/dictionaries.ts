@@ -63,7 +63,7 @@ export type Dictionary = {
     duration: string
     difficulty: string
     minAge: string
-    stairs: string
+    note: string
     bookThis: string
     sharedItinerary: { title: string; text: string }[]
     sharedNotIncluded: string[]
@@ -71,7 +71,7 @@ export type Dictionary = {
       duration: string
       difficulty: string
       minAge: string
-      stairs: string
+      note: string
     }
   }
   experience: {
@@ -85,9 +85,9 @@ export type Dictionary = {
     alt: string
     filters: {
       all: string
-      rafting: string
-      nature: string
-      facilities: string
+      atv: string
+      trail: string
+      beach: string
     }
     close: string
     prev: string
@@ -126,8 +126,10 @@ export type Dictionary = {
     lead: string
     addressLabel: string
     openMaps: string
-    ownTransportTitle: string
-    ownTransportText: string
+    areasTitle: string
+    areas: { name: string; text: string }[]
+    tipTitle: string
+    tipText: string
   }
   contact: {
     title: string
@@ -164,68 +166,66 @@ export type Dictionary = {
 const sharedDetailEn = {
   sharedItinerary: [
     {
-      title: 'Check-in & briefing',
-      text: 'Arrive at the base, store belongings, and get a safety briefing from your guide.',
+      title: 'Hotel pickup',
+      text: 'Private car pickup from your hotel area, then transfer to the ATV base.',
     },
     {
-      title: 'Gear up & descend',
-      text: 'Life jacket, helmet, and paddle — then walk down the gorge stairs to the river.',
+      title: 'Briefing & gear',
+      text: 'Safety briefing, helmet fitting, and a quick practice before the trail.',
     },
     {
-      title: 'Raft the Ayung',
-      text: 'About two hours of Class II–III rapids through rainforest and waterfall views.',
+      title: 'ATV adventure',
+      text: 'Ride jungle tracks, rice paddies, shallow rivers, or beach routes depending on your package.',
     },
     {
       title: 'Shower & lunch',
-      text: 'Hot shower, change, then Indonesian lunch before transfer or departure.',
+      text: 'Hot shower, change clothes, then lunch before drop-off back to your hotel.',
     },
   ],
   sharedNotIncluded: [
     'Personal expenses and tips',
     'Hotel stay',
     'Photos / video packages (if sold separately on site)',
-    'Pickup outside the selected transfer zone',
+    'Extra riding time beyond the package',
   ],
   facts: {
-    duration: 'About 2 hours on the river (half-day overall with transfer & lunch)',
-    difficulty: 'Class II–III — beginner friendly with a professional guide',
-    minAge: 'Minimum age 7, accompanied by an adult',
-    stairs:
-      'Steep stairs to reach the river. Not recommended for guests with limited mobility or heart conditions.',
+    duration: 'About 1.5–2 hours on the ATV (half-day overall with transfer & lunch)',
+    difficulty: 'Beginner friendly — dual ride options available on request',
+    minAge: 'Children welcome as passengers; confirm driver age when booking',
+    note: 'Wear closed shoes and clothes you do not mind getting muddy or wet. Lockers are available at the base.',
   },
 }
 
 const sharedDetailId = {
   sharedItinerary: [
     {
-      title: 'Check-in & briefing',
-      text: 'Tiba di base camp, simpan barang, dan ikuti briefing keselamatan dari guide.',
+      title: 'Jemput hotel',
+      text: 'Jemputan mobil privat dari area hotel, lalu menuju base ATV.',
     },
     {
-      title: 'Persiapan & turun ke sungai',
-      text: 'Life jacket, helm, dan dayung — lalu turun tangga menuju Sungai Ayung.',
+      title: 'Briefing & perlengkapan',
+      text: 'Briefing keselamatan, pasang helm, dan latihan singkat sebelum masuk jalur.',
     },
     {
-      title: 'Rafting di Ayung',
-      text: 'Sekitar 2 jam arung jeram kelas II–III melewati hutan dan air terjun.',
+      title: 'Petualangan ATV',
+      text: 'Menyusuri jalur hutan, sawah, sungai dangkal, atau pantai sesuai paket yang dipilih.',
     },
     {
       title: 'Mandi & makan siang',
-      text: 'Mandi air hangat, ganti baju, lalu makan siang Indonesia sebelum pulang.',
+      text: 'Shower hangat, ganti baju, lalu makan siang sebelum diantar kembali ke hotel.',
     },
   ],
   sharedNotIncluded: [
     'Pengeluaran pribadi dan tip',
     'Penginapan hotel',
     'Paket foto / video (jika dijual terpisah di lokasi)',
-    'Penjemputan di luar zona transfer yang dipilih',
+    'Waktu riding di luar durasi paket',
   ],
   facts: {
-    duration: 'Sekitar 2 jam di sungai (setengah hari termasuk transfer & makan)',
-    difficulty: 'Kelas II–III — ramah pemula dengan guide profesional',
-    minAge: 'Usia minimal 7 tahun, didampingi orang dewasa',
-    stairs:
-      'Tangga curam menuju sungai. Tidak disarankan bagi tamu dengan mobilitas terbatas atau kondisi jantung.',
+    duration: 'Sekitar 1,5–2 jam di ATV (setengah hari termasuk transfer & makan)',
+    difficulty: 'Ramah pemula — opsi tandem tersedia (konfirmasi saat booking)',
+    minAge: 'Anak boleh ikut sebagai penumpang; konfirmasi usia pengemudi saat booking',
+    note: 'Pakai sepatu tertutup dan baju yang tidak masalah kotor/basah. Locker tersedia di base.',
   },
 }
 
@@ -246,8 +246,8 @@ export const dictionaries: Record<Lang, Dictionary> = {
     lang: { en: 'EN', id: 'ID', label: 'Language' },
     hero: {
       brand: 'Wild ATV Bali',
-      title: 'Ride Bali’s wildest river gorge',
-      lead: 'White water rafting on the Ayung — rainforest walls, waterfalls, and guides who know every rapid.',
+      title: 'Feel the thrill of Bali by ATV',
+      lead: 'Ride jungle trails, rice paddies, and beach tracks with local guides — from Ubud to the coast.',
       ctaBook: 'Book on WhatsApp',
       ctaPackages: 'View packages',
     },
@@ -256,9 +256,9 @@ export const dictionaries: Record<Lang, Dictionary> = {
       lead: 'A few good reasons to book direct',
       items: [
         {
-          id: 'price',
-          title: 'Best price guarantee',
-          text: 'Unbeatable rates for the full Ayung experience — no hidden fees.',
+          id: 'memorable',
+          title: 'Memorable adventures',
+          text: 'Thrills, local expertise, and routes you will actually remember.',
         },
         {
           id: 'payment',
@@ -273,77 +273,81 @@ export const dictionaries: Record<Lang, Dictionary> = {
       ],
     },
     packages: {
-      title: 'Choose your river day',
-      lead: 'Transparent pricing, payment on arrival, and everything you need for the water — gear, lunch, insurance included.',
+      title: 'Choose your ATV ride',
+      lead: 'Transparent pricing, hotel transfer, guide, lunch, and safety gear included.',
       from: 'From',
       book: 'Book this package',
       details: 'View details',
       mostBooked: 'Most booked',
       items: {
-        'own-transport': {
-          title: 'Own Transport',
-          subtitle: 'Ayung White Water Rafting',
+        'north-ubud': {
+          title: 'North Ubud Tour',
+          subtitle: 'Bali ATV Quad Bike',
           blurb:
-            'Meet us at the activity base — ideal if you already have a driver or scooter.',
+            'Explore North Ubud trails through rugged terrain, rice fields, and hidden paths — 1.5 hours of pure adventure.',
           includes: [
-            'Rafting ~2 hours',
+            'Hotel pick-up & drop-off (private car)*',
+            'ATV Quad Bike tour (1.5 hours)',
             'English-speaking guide',
-            'Indonesian lunch',
-            'All equipment & safety gear',
-            'Locker, towel & shower',
-            'Insurance, service & tax',
+            'Welcome drink',
+            'Lunch',
+            'All necessary safety gear',
+            'Towel, shower, locker & change room',
+            'ATV insurance, service & tax',
           ],
           message:
-            'Hi! I want to book Own Transport with Wild ATV Bali (from IDR 310.000).',
+            'Hi! I want to book Bali ATV Quad Bike North Ubud Tour with Wild ATV Bali (from IDR 720.000).',
           longDescription:
-            'Come with your own transport and join Ayung white water rafting with a full set of gear, guide, lunch, and facilities at the base.',
+            'A scenic North Ubud ATV ride with private hotel transfer, welcome drink, lunch, and full safety gear — ideal if you want deeper jungle and countryside tracks.',
         },
-        'ubud-transfer': {
-          title: 'Ubud Private Transfer',
-          subtitle: 'Ayung White Water Rafting',
+        'south-ubud': {
+          title: 'South Ubud Tour',
+          subtitle: 'Bali ATV Quad Bike',
           blurb:
-            'Hotel pick-up and drop-off in Ubud — the easiest full-day adventure.',
+            'The most popular Ubud ATV experience — rice paddies, village trails, and river crossings in 1.5 hours.',
           includes: [
-            'Ubud hotel pick-up & drop-off',
-            'Rafting ~2 hours',
+            'Hotel pick-up & drop-off (private car)*',
+            'ATV Quad Bike tour (1.5 hours)',
             'English-speaking guide',
-            'Indonesian lunch',
-            'All equipment & safety gear',
-            'Locker, towel & shower',
-            'Insurance, service & tax',
+            'Refreshment (water)',
+            'Lunch (Indonesian food)',
+            'All necessary safety gear',
+            'Towel, shower, locker & change room',
+            'ATV insurance, service & tax',
           ],
           message:
-            'Hi! I want to book Ubud Private Transfer with Wild ATV Bali (from IDR 415.000).',
+            'Hi! I want to book Bali ATV Quad Bike South Ubud Tour with Wild ATV Bali (from IDR 495.000).',
           longDescription:
-            'Private transfer from your Ubud hotel, then raft the Ayung with guide, lunch, and all safety equipment included.',
+            'Our best-value South Ubud ATV tour with hotel transfer, Indonesian lunch, and everything you need for a muddy, fun half-day ride.',
         },
-        'outside-ubud': {
-          title: 'Outside Ubud Transfer',
-          subtitle: 'Ayung White Water Rafting',
+        beach: {
+          title: 'Beach Tour',
+          subtitle: 'Bali ATV Quad Bike',
           blurb:
-            'Private transfer from areas outside Ubud — Kuta, Seminyak, Sanur, and more.',
+            'Two hours of coastal ATV riding — sand tracks, sea breeze, and a different Bali adventure.',
           includes: [
-            'Outside Ubud pick-up & drop-off',
-            'Rafting ~2 hours',
+            'Hotel pick-up & drop-off (private car)',
+            'ATV Quad Bike tour (2 hours)',
             'English-speaking guide',
-            'Indonesian lunch',
-            'All equipment & safety gear',
-            'Locker, towel & shower',
-            'Insurance, service & tax',
+            'Refreshment (water)',
+            'Lunch (fried rice)',
+            'All necessary safety gear',
+            'Towel, shower, locker & change room',
+            'ATV insurance, service & tax',
           ],
           message:
-            'Hi! I want to book Outside Ubud Private Transfer with Wild ATV Bali (from IDR 520.000).',
+            'Hi! I want to book Bali ATV Quad Bike on the Beach Tour with Wild ATV Bali (from IDR 975.000).',
           longDescription:
-            'Door-to-door private transfer from outside Ubud, plus the full Ayung rafting experience with lunch and facilities.',
+            'Ride ATVs by the beach with private transfer, fried-rice lunch, and a longer 2-hour session for guests who want sand and sea views.',
         },
       },
       combo: {
         label: 'Special offer',
         title: 'ATV + Ayung Rafting Combo',
         blurb:
-          'Quad bike through jungle trails, then ride the river — one unforgettable Bali day.',
+          'Quad bike through Ubud trails, then white water rafting on the Ayung — one unforgettable Bali day.',
         message:
-          'Hi! I want to book the Combo Bali ATV Quad Bike and Ayung White Water Rafting with Wild ATV Bali (from IDR 895.000).',
+          'Hi! I want to book the Combo Bali ATV Quad Bike and Ayung White Water Rafting with Wild ATV Bali (from IDR 675.000).',
         ask: 'Ask about the combo',
       },
     },
@@ -356,41 +360,41 @@ export const dictionaries: Record<Lang, Dictionary> = {
       goodToKnow: 'Good to know',
       duration: 'Duration',
       difficulty: 'Difficulty',
-      minAge: 'Minimum age',
-      stairs: 'Access note',
+      minAge: 'Age guidance',
+      note: 'What to wear',
       bookThis: 'Book this package',
       ...sharedDetailEn,
     },
     experience: {
       title: 'How the day flows',
-      lead: 'One clear path from briefing to the final paddle — no guesswork.',
+      lead: 'From hotel pickup to the final muddy grin — clear and easy.',
       steps: [
         {
           n: '01',
-          title: 'Meet & gear up',
-          text: 'Briefing, life jacket, helmet — then descend into the Ayung gorge.',
+          title: 'Pickup & arrive',
+          text: 'Private transfer to the ATV base with a short welcome and briefing.',
         },
         {
           n: '02',
-          title: 'Ride the river',
-          text: 'About two hours of rapids, rainforest walls, and waterfall pauses.',
+          title: 'Ride the trails',
+          text: '1.5–2 hours through jungle paths, rice fields, rivers, or beach tracks.',
         },
         {
           n: '03',
-          title: 'Lunch & unwind',
-          text: 'Hot shower, locker, towel, then Indonesian lunch overlooking the valley.',
+          title: 'Shower & lunch',
+          text: 'Clean up, eat, then ride back to your hotel with muddy memories.',
         },
       ],
     },
     gallery: {
-      title: 'On the water',
-      lead: 'Moments from the gorge — replace these placeholders with your own shoot.',
-      alt: 'Ayung rafting gallery',
+      title: 'On the trail',
+      lead: 'Moments from Ubud trails and beach rides — replace placeholders with your own shoot.',
+      alt: 'Wild ATV Bali gallery',
       filters: {
         all: 'All',
-        rafting: 'Rafting',
-        nature: 'Nature',
-        facilities: 'Facilities',
+        atv: 'ATV',
+        trail: 'Trail',
+        beach: 'Beach',
       },
       close: 'Close',
       prev: 'Previous photo',
@@ -399,13 +403,13 @@ export const dictionaries: Record<Lang, Dictionary> = {
     trust: {
       items: [
         {
-          id: 'nib',
-          title: 'Registered business',
-          text: 'NIB on file — book with a licensed Bali operator.',
+          id: 'adventure',
+          title: 'Memorable adventures',
+          text: 'Thrills, expertise, unforgettable routes across Ubud and the coast.',
         },
         {
           id: 'insurance',
-          title: 'Rafting insurance',
+          title: 'ATV insurance',
           text: 'Coverage included on every package for peace of mind.',
         },
         {
@@ -422,50 +426,50 @@ export const dictionaries: Record<Lang, Dictionary> = {
     },
     about: {
       title: 'About & safety',
-      lead: 'The people, gear, and standards behind every Ayung run.',
-      introTitle: 'Built for the river',
+      lead: 'The people, gear, and standards behind every Wild ATV Bali ride.',
+      introTitle: 'Built for the trail',
       intro:
-        'We run white water rafting on Bali’s Ayung River with local guides, clear safety briefings, and facilities ready when you finish paddling. Our goal is simple: an exciting day that still feels well looked after.',
+        'Wild ATV Bali runs quad bike adventures through Ubud’s countryside and coastal tracks. Local guides, clear briefings, and base facilities mean you get the adrenaline — without the chaos.',
       teamTitle: 'Our team',
-      teamLead: 'Experienced Balinese guides who know the gorge line by line.',
+      teamLead: 'Guides and crew who know every muddy turn.',
       team: [
         {
-          role: 'River guides',
-          text: 'English-speaking guides lead every raft, manage rapids, and keep the energy high but controlled.',
+          role: 'ATV guides',
+          text: 'English-speaking guides lead the convoy, pace the group, and keep beginners comfortable.',
         },
         {
           role: 'Base crew',
-          text: 'Check-in, lockers, gear fitting, and lunch service so your day flows without friction.',
+          text: 'Check-in, gear fitting, lockers, showers, and lunch so the day runs smoothly.',
         },
         {
           role: 'Drivers',
-          text: 'Private transfer drivers for Ubud and outside-Ubud pickups — on time and easy to reach by WhatsApp.',
+          text: 'Private transfer drivers for hotel pickup and drop-off — easy to reach on WhatsApp.',
         },
       ],
       safetyTitle: 'Safety first',
-      safetyLead: 'Briefing, gear, and conditions checks before anyone hits the water.',
+      safetyLead: 'Briefing and gear before anyone hits the throttle.',
       safety: [
         {
           title: 'Mandatory briefing',
-          text: 'Every guest gets paddle commands, swim protocol, and rapid etiquette before launch.',
+          text: 'Throttle control, braking, and trail etiquette before the ride starts.',
         },
         {
-          title: 'Certified gear',
-          text: 'Helmets and life jackets for all guests — fitted at the base before the descent.',
+          title: 'Safety gear',
+          text: 'Helmets and riding equipment provided and fitted at the base.',
         },
         {
-          title: 'River judgment',
-          text: 'If water levels are unsafe, we delay or reschedule. Thrill never beats safety.',
+          title: 'Guided convoy',
+          text: 'You ride with a guide — not alone on unfamiliar tracks.',
         },
       ],
       gearTitle: 'Equipment & facilities',
       gear: [
-        'Helmet & life jacket',
-        'Paddle & raft',
+        'Helmet & safety gear',
+        'ATV quad bike',
         'Locker & change room',
         'Towel & hot shower',
-        'Indonesian lunch',
-        'On-river insurance coverage',
+        'Lunch / refreshment',
+        'ATV insurance coverage',
       ],
       cta: 'Ask about safety or booking',
     },
@@ -474,19 +478,19 @@ export const dictionaries: Record<Lang, Dictionary> = {
       lead: 'Real notes from travelers who booked direct.',
       items: [
         {
-          name: 'Sophie',
-          place: 'Australia',
-          text: 'A perfect mix of thrill and jungle scenery. Pickup was on time and the guides made everyone feel safe.',
+          name: 'Emma',
+          place: 'UK',
+          text: 'Muddy, fun, and beautifully organized. The South Ubud trail was the highlight of our trip.',
         },
         {
-          name: 'Marco',
-          place: 'Italy',
-          text: 'Clear booking, friendly crew, and lunch that actually tasted great after the paddle. Highly recommend.',
-        },
-        {
-          name: 'Aiko',
+          name: 'Kenji',
           place: 'Japan',
-          text: 'First-time rafting and it felt easy to follow. Beautiful river, professional team throughout.',
+          text: 'Guide was patient with beginners. Hotel pickup on time and lunch after the ride was perfect.',
+        },
+        {
+          name: 'Sofia',
+          place: 'Spain',
+          text: 'We did the beach ATV and it felt totally different from the jungle. Highly recommend.',
         },
       ],
     },
@@ -495,46 +499,61 @@ export const dictionaries: Record<Lang, Dictionary> = {
       lead: 'Quick answers before you book.',
       items: [
         {
-          q: 'Is rafting safe for beginners?',
-          a: 'Yes. Guides brief every group, and all guests wear helmets and life jackets. Ayung rapids are generally Class II–III.',
+          q: 'Do I need ATV experience?',
+          a: 'No. Most guests are first-timers. You get a briefing and can request a dual/tandem ride when booking.',
+        },
+        {
+          q: 'Will I get muddy or wet?',
+          a: 'Very likely — especially on Ubud trails with rice fields and river crossings. That is part of the fun.',
+        },
+        {
+          q: 'Is hotel transfer included?',
+          a: 'Yes on the listed packages (private car). Pickup zones can vary — confirm your hotel area on WhatsApp.',
+        },
+        {
+          q: 'What should I wear?',
+          a: 'Closed shoes, clothes you can get dirty, and a change of outfit. Showers and lockers are at the base.',
         },
         {
           q: 'Can children join?',
-          a: 'Children from age 7 can join when accompanied by an adult. Please mention ages when you book.',
-        },
-        {
-          q: 'Do I need to know how to swim?',
-          a: 'Basic water comfort helps, but life jackets are mandatory. Tell your guide if you are nervous in water.',
-        },
-        {
-          q: 'What if it rains?',
-          a: 'Rafting usually continues in light rain. Trips may be delayed or rescheduled only if river conditions are unsafe.',
+          a: 'Yes, usually as passengers. Tell us ages when you book so we can arrange a suitable ATV.',
         },
         {
           q: 'How do cancel or reschedule work?',
-          a: 'Message us on WhatsApp as early as possible. We will help reschedule based on availability. Same-day cancellations may not be adjustable.',
-        },
-        {
-          q: 'What should I bring?',
-          a: 'Swimwear, change of clothes, sandals with strap, sunscreen, and a little cash for tips or extras. Lockers are available at the base.',
+          a: 'Message us on WhatsApp as early as possible. We will help reschedule based on availability.',
         },
       ],
     },
     location: {
-      title: 'Activity location',
-      lead: 'Find us in Kedewatan, Ubud — next to the Ayung River gorge.',
-      addressLabel: 'Address',
+      title: 'Where we ride',
+      lead: 'ATV bases around Ubud and the beach — with a Denpasar marketing office for support.',
+      addressLabel: 'Marketing office',
       openMaps: 'Open in Google Maps',
-      ownTransportTitle: 'Coming with your own transport?',
-      ownTransportText:
-        'Set your pin to our Kedewatan address and arrive 15–20 minutes early for check-in. Parking is available near the activity base. If you get lost, WhatsApp us and we will guide you in.',
+      areasTitle: 'Activity areas',
+      areas: [
+        {
+          name: 'North Ubud',
+          text: 'Longer countryside trails and scenic North Ubud terrain.',
+        },
+        {
+          name: 'South Ubud',
+          text: 'Popular rice-field and village tracks — our most booked ride.',
+        },
+        {
+          name: 'Beach',
+          text: 'Coastal ATV routes with sand tracks and sea breeze.',
+        },
+      ],
+      tipTitle: 'Getting there',
+      tipText:
+        'Hotel pickup is included on packages. If you self-arrange transport, WhatsApp us for the exact meeting point of your chosen tour.',
     },
     contact: {
       title: 'Ready when you are',
       lead: 'Chat on WhatsApp for the fastest confirmation — or send a quick inquiry and we’ll reply with availability.',
       phone: 'WhatsApp / Phone',
       email: 'Email',
-      base: 'Activity base',
+      base: 'Marketing office',
       chat: 'Chat on WhatsApp',
       name: 'Name',
       date: 'Preferred date',
@@ -553,10 +572,10 @@ export const dictionaries: Record<Lang, Dictionary> = {
       inquiryNote: 'Note',
     },
     footer: {
-      tag: 'ATV adventures & white water rafting in Bali.',
+      tag: 'ATV adventures across Ubud trails and Bali beaches.',
       made: 'Wild ATV Bali. Made in Bali.',
     },
-    waGeneric: 'Hi! I want to book with Wild ATV Bali.',
+    waGeneric: 'Hi! I want to book an ATV tour with Wild ATV Bali.',
     waQuestion: 'Hi! I have a question for Wild ATV Bali.',
     waFloat: 'Chat on WhatsApp',
   },
@@ -576,8 +595,8 @@ export const dictionaries: Record<Lang, Dictionary> = {
     lang: { en: 'EN', id: 'ID', label: 'Bahasa' },
     hero: {
       brand: 'Wild ATV Bali',
-      title: 'Jelajahi jurang sungai liar di Bali',
-      lead: 'Arung jeram di Sungai Ayung — tebing hutan, air terjun, dan guide yang mengenal setiap jeram.',
+      title: 'Rasakan sensasi Bali dengan ATV',
+      lead: 'Jelajahi jalur hutan, sawah, dan pantai bersama guide lokal — dari Ubud sampai pesisir.',
       ctaBook: 'Booking via WhatsApp',
       ctaPackages: 'Lihat paket',
     },
@@ -586,9 +605,9 @@ export const dictionaries: Record<Lang, Dictionary> = {
       lead: 'Beberapa alasan bagus untuk booking langsung',
       items: [
         {
-          id: 'price',
-          title: 'Garansi harga terbaik',
-          text: 'Tarif kompetitif untuk pengalaman Ayung lengkap — tanpa biaya tersembunyi.',
+          id: 'memorable',
+          title: 'Petualangan berkesan',
+          text: 'Sensasi, keahlian lokal, dan rute yang benar-benar diingat.',
         },
         {
           id: 'payment',
@@ -603,77 +622,81 @@ export const dictionaries: Record<Lang, Dictionary> = {
       ],
     },
     packages: {
-      title: 'Pilih hari di sungai',
-      lead: 'Harga transparan, bayar di tempat, dan semua kebutuhan di air — perlengkapan, makan, asuransi termasuk.',
+      title: 'Pilih jalur ATV Anda',
+      lead: 'Harga transparan, transfer hotel, guide, makan, dan safety gear termasuk.',
       from: 'Mulai',
       book: 'Booking paket ini',
       details: 'Lihat detail',
       mostBooked: 'Paling banyak dibooking',
       items: {
-        'own-transport': {
-          title: 'Transportasi sendiri',
-          subtitle: 'Ayung White Water Rafting',
+        'north-ubud': {
+          title: 'Tur North Ubud',
+          subtitle: 'Bali ATV Quad Bike',
           blurb:
-            'Datang ke base camp sendiri — cocok jika sudah punya driver atau motor.',
+            'Jelajahi jalur North Ubud: medan menantang, sawah, dan jalur tersembunyi — 1,5 jam petualangan.',
           includes: [
-            'Rafting ~2 jam',
+            'Jemput & antar hotel (mobil privat)*',
+            'Tur ATV Quad Bike (1,5 jam)',
             'Guide berbahasa Inggris',
-            'Makan siang Indonesia',
-            'Semua perlengkapan & safety gear',
-            'Locker, handuk & shower',
-            'Asuransi, service & pajak',
+            'Welcome drink',
+            'Makan siang',
+            'Semua safety gear',
+            'Handuk, shower, locker & ruang ganti',
+            'Asuransi ATV, service & pajak',
           ],
           message:
-            'Halo! Saya ingin booking Transportasi Sendiri di Wild ATV Bali (mulai IDR 310.000).',
+            'Halo! Saya ingin booking Bali ATV Quad Bike North Ubud Tour di Wild ATV Bali (mulai IDR 720.000).',
           longDescription:
-            'Datang dengan transportasi sendiri dan nikmati rafting Ayung lengkap dengan perlengkapan, guide, makan siang, dan fasilitas di base.',
+            'Riding ATV North Ubud dengan transfer hotel privat, welcome drink, makan siang, dan perlengkapan lengkap — cocok untuk jalur pedesaan yang lebih dalam.',
         },
-        'ubud-transfer': {
-          title: 'Transfer privat Ubud',
-          subtitle: 'Ayung White Water Rafting',
+        'south-ubud': {
+          title: 'Tur South Ubud',
+          subtitle: 'Bali ATV Quad Bike',
           blurb:
-            'Jemput-antar hotel di Ubud — cara paling mudah untuk petualangan sehari penuh.',
+            'Pengalaman ATV Ubud paling populer — sawah, jalur desa, dan sungai dangkal dalam 1,5 jam.',
           includes: [
-            'Jemput & antar hotel Ubud',
-            'Rafting ~2 jam',
+            'Jemput & antar hotel (mobil privat)*',
+            'Tur ATV Quad Bike (1,5 jam)',
             'Guide berbahasa Inggris',
-            'Makan siang Indonesia',
-            'Semua perlengkapan & safety gear',
-            'Locker, handuk & shower',
-            'Asuransi, service & pajak',
+            'Refreshment (air)',
+            'Makan siang (masakan Indonesia)',
+            'Semua safety gear',
+            'Handuk, shower, locker & ruang ganti',
+            'Asuransi ATV, service & pajak',
           ],
           message:
-            'Halo! Saya ingin booking Transfer Privat Ubud di Wild ATV Bali (mulai IDR 415.000).',
+            'Halo! Saya ingin booking Bali ATV Quad Bike South Ubud Tour di Wild ATV Bali (mulai IDR 495.000).',
           longDescription:
-            'Transfer privat dari hotel Ubud, lalu rafting di Ayung dengan guide, makan siang, dan seluruh peralatan keselamatan.',
+            'Paket South Ubud dengan value terbaik: transfer hotel, makan siang Indonesia, dan semua kebutuhan untuk half-day ride yang seru.',
         },
-        'outside-ubud': {
-          title: 'Transfer luar Ubud',
-          subtitle: 'Ayung White Water Rafting',
+        beach: {
+          title: 'Tur Pantai',
+          subtitle: 'Bali ATV Quad Bike',
           blurb:
-            'Transfer privat dari luar Ubud — Kuta, Seminyak, Sanur, dan sekitarnya.',
+            'Dua jam ATV di jalur pesisir — pasir, angin laut, dan petualangan Bali yang berbeda.',
           includes: [
-            'Jemput & antar luar Ubud',
-            'Rafting ~2 jam',
+            'Jemput & antar hotel (mobil privat)',
+            'Tur ATV Quad Bike (2 jam)',
             'Guide berbahasa Inggris',
-            'Makan siang Indonesia',
-            'Semua perlengkapan & safety gear',
-            'Locker, handuk & shower',
-            'Asuransi, service & pajak',
+            'Refreshment (air)',
+            'Makan siang (nasi goreng)',
+            'Semua safety gear',
+            'Handuk, shower, locker & ruang ganti',
+            'Asuransi ATV, service & pajak',
           ],
           message:
-            'Halo! Saya ingin booking Transfer Luar Ubud di Wild ATV Bali (mulai IDR 520.000).',
+            'Halo! Saya ingin booking Bali ATV Quad Bike on the Beach Tour di Wild ATV Bali (mulai IDR 975.000).',
           longDescription:
-            'Transfer privat door-to-door dari luar Ubud, plus pengalaman rafting Ayung lengkap dengan makan dan fasilitas.',
+            'ATV di pantai dengan transfer privat, makan nasi goreng, dan sesi 2 jam untuk yang ingin sensasi pasir dan laut.',
         },
       },
       combo: {
         label: 'Penawaran spesial',
         title: 'Combo ATV + Ayung Rafting',
         blurb:
-          'ATV menyusuri jalur hutan, lalu arung jeram — satu hari Bali yang tak terlupakan.',
+          'ATV menyusuri jalur Ubud, lalu arung jeram Ayung — satu hari Bali yang tak terlupakan.',
         message:
-          'Halo! Saya ingin booking Combo ATV Quad Bike dan Ayung White Water Rafting di Wild ATV Bali (mulai IDR 895.000).',
+          'Halo! Saya ingin booking Combo Bali ATV Quad Bike dan Ayung White Water Rafting di Wild ATV Bali (mulai IDR 675.000).',
         ask: 'Tanya tentang combo',
       },
     },
@@ -686,41 +709,41 @@ export const dictionaries: Record<Lang, Dictionary> = {
       goodToKnow: 'Perlu diketahui',
       duration: 'Durasi',
       difficulty: 'Tingkat kesulitan',
-      minAge: 'Usia minimal',
-      stairs: 'Catatan akses',
+      minAge: 'Panduan usia',
+      note: 'Pakaian',
       bookThis: 'Booking paket ini',
       ...sharedDetailId,
     },
     experience: {
       title: 'Alur hari kegiatan',
-      lead: 'Satu jalur jelas dari briefing sampai dayungan terakhir — tanpa tebak-tebakan.',
+      lead: 'Dari jemputan hotel sampai senyum penuh lumpur — jelas dan mudah.',
       steps: [
         {
           n: '01',
-          title: 'Bertemu & bersiap',
-          text: 'Briefing, life jacket, helm — lalu turun ke jurang Ayung.',
+          title: 'Jemput & tiba',
+          text: 'Transfer privat ke base ATV dengan welcome singkat dan briefing.',
         },
         {
           n: '02',
-          title: 'Menyusuri sungai',
-          text: 'Sekitar dua jam jeram, dinding hutan, dan jeda di air terjun.',
+          title: 'Menyusuri jalur',
+          text: '1,5–2 jam melewati hutan, sawah, sungai, atau jalur pantai.',
         },
         {
           n: '03',
-          title: 'Makan & istirahat',
-          text: 'Shower hangat, locker, handuk, lalu makan siang Indonesia dengan pemandangan lembah.',
+          title: 'Mandi & makan',
+          text: 'Bersih-bersih, makan, lalu kembali ke hotel dengan kenangan berlumpur.',
         },
       ],
     },
     gallery: {
-      title: 'Di atas air',
-      lead: 'Momen di jurang — ganti placeholder ini dengan foto asli Anda.',
-      alt: 'Galeri rafting Ayung',
+      title: 'Di jalur',
+      lead: 'Momen dari jalur Ubud dan pantai — ganti placeholder dengan foto asli Anda.',
+      alt: 'Galeri Wild ATV Bali',
       filters: {
         all: 'Semua',
-        rafting: 'Rafting',
-        nature: 'Alam',
-        facilities: 'Fasilitas',
+        atv: 'ATV',
+        trail: 'Jalur',
+        beach: 'Pantai',
       },
       close: 'Tutup',
       prev: 'Foto sebelumnya',
@@ -729,13 +752,13 @@ export const dictionaries: Record<Lang, Dictionary> = {
     trust: {
       items: [
         {
-          id: 'nib',
-          title: 'Usaha terdaftar',
-          text: 'NIB tersedia — booking dengan operator Bali berizin.',
+          id: 'adventure',
+          title: 'Petualangan berkesan',
+          text: 'Sensasi, keahlian, dan rute tak terlupakan di Ubud maupun pesisir.',
         },
         {
           id: 'insurance',
-          title: 'Asuransi rafting',
+          title: 'Asuransi ATV',
           text: 'Perlindungan termasuk di setiap paket untuk ketenangan Anda.',
         },
         {
@@ -752,50 +775,50 @@ export const dictionaries: Record<Lang, Dictionary> = {
     },
     about: {
       title: 'Tentang & keselamatan',
-      lead: 'Tim, peralatan, dan standar di balik setiap perjalanan Ayung.',
-      introTitle: 'Dibangun untuk sungai',
+      lead: 'Tim, peralatan, dan standar di balik setiap riding Wild ATV Bali.',
+      introTitle: 'Dibangun untuk jalur',
       intro:
-        'Kami menjalankan white water rafting di Sungai Ayung Bali dengan guide lokal, briefing keselamatan yang jelas, dan fasilitas siap saat Anda selesai dayung. Tujuannya sederhana: hari yang seru sekaligus terurus dengan baik.',
+        'Wild ATV Bali menjalankan petualangan quad bike di pedesaan Ubud dan jalur pesisir. Guide lokal, briefing jelas, dan fasilitas base membuat Anda mendapat adrenalin — tanpa kekacauan.',
       teamTitle: 'Tim kami',
-      teamLead: 'Guide Bali berpengalaman yang mengenal jurang dari ujung ke ujung.',
+      teamLead: 'Guide dan kru yang mengenal setiap belokan berlumpur.',
       team: [
         {
-          role: 'Guide sungai',
-          text: 'Guide berbahasa Inggris memimpin setiap perahu, mengatur jeram, dan menjaga energi tetap aman.',
+          role: 'Guide ATV',
+          text: 'Guide berbahasa Inggris memimpin konvoi, mengatur tempo, dan membuat pemula nyaman.',
         },
         {
           role: 'Kru base',
-          text: 'Check-in, locker, pemasangan gear, dan layanan makan siang agar hari berjalan lancar.',
+          text: 'Check-in, pemasangan gear, locker, shower, dan makan siang agar hari berjalan lancar.',
         },
         {
           role: 'Driver',
-          text: 'Driver transfer privat untuk jemputan Ubud dan luar Ubud — tepat waktu dan mudah dihubungi via WhatsApp.',
+          text: 'Driver transfer privat untuk jemput-antar hotel — mudah dihubungi via WhatsApp.',
         },
       ],
       safetyTitle: 'Keselamatan utama',
-      safetyLead: 'Briefing, peralatan, dan cek kondisi sebelum siapa pun masuk air.',
+      safetyLead: 'Briefing dan perlengkapan sebelum gas pertama.',
       safety: [
         {
           title: 'Briefing wajib',
-          text: 'Setiap tamu mendapat perintah dayung, protokol berenang, dan etika jeram sebelum mulai.',
+          text: 'Kontrol gas, pengereman, dan etika jalur sebelum mulai.',
         },
         {
-          title: 'Peralatan standar',
-          text: 'Helm dan life jacket untuk semua tamu — dipasang di base sebelum turun ke sungai.',
+          title: 'Safety gear',
+          text: 'Helm dan perlengkapan riding disediakan serta dipasang di base.',
         },
         {
-          title: 'Keputusan sungai',
-          text: 'Jika level air tidak aman, kami tunda atau jadwalkan ulang. Keseruan tidak mengalahkan keselamatan.',
+          title: 'Konvoi dipandu',
+          text: 'Anda riding bersama guide — bukan sendiri di jalur yang belum dikenal.',
         },
       ],
       gearTitle: 'Peralatan & fasilitas',
       gear: [
-        'Helm & life jacket',
-        'Dayung & perahu',
+        'Helm & safety gear',
+        'ATV quad bike',
         'Locker & ruang ganti',
         'Handuk & shower hangat',
-        'Makan siang Indonesia',
-        'Asuransi kegiatan di sungai',
+        'Makan / refreshment',
+        'Asuransi ATV',
       ],
       cta: 'Tanya soal keselamatan atau booking',
     },
@@ -804,19 +827,19 @@ export const dictionaries: Record<Lang, Dictionary> = {
       lead: 'Catatan dari traveler yang booking langsung.',
       items: [
         {
-          name: 'Sophie',
-          place: 'Australia',
-          text: 'Kombinasi seru dan pemandangan hutan yang sempurna. Jemputan tepat waktu dan guide membuat semua merasa aman.',
+          name: 'Emma',
+          place: 'UK',
+          text: 'Berlumpur, seru, dan terorganisir. Jalur South Ubud jadi highlight perjalanan kami.',
         },
         {
-          name: 'Marco',
-          place: 'Italy',
-          text: 'Booking jelas, kru ramah, dan makan siang enak setelah dayung. Sangat direkomendasikan.',
-        },
-        {
-          name: 'Aiko',
+          name: 'Kenji',
           place: 'Japan',
-          text: 'Pertama kali rafting dan mudah diikuti. Sungai indah, tim profesional sepanjang perjalanan.',
+          text: 'Guide sabar untuk pemula. Jemputan hotel tepat waktu dan makan setelah riding sempurna.',
+        },
+        {
+          name: 'Sofia',
+          place: 'Spain',
+          text: 'Kami coba ATV pantai dan rasanya beda dari jungle. Sangat direkomendasikan.',
         },
       ],
     },
@@ -825,46 +848,61 @@ export const dictionaries: Record<Lang, Dictionary> = {
       lead: 'Jawaban singkat sebelum Anda booking.',
       items: [
         {
-          q: 'Apakah aman untuk pemula?',
-          a: 'Ya. Setiap grup mendapat briefing, dan semua tamu memakai helm serta life jacket. Jeram Ayung umumnya kelas II–III.',
+          q: 'Perlu pengalaman ATV?',
+          a: 'Tidak. Mayoritas tamu pemula. Ada briefing dan bisa minta tandem saat booking.',
+        },
+        {
+          q: 'Apakah akan kotor atau basah?',
+          a: 'Sangat mungkin — terutama jalur Ubud dengan sawah dan sungai. Itu bagian dari keseruannya.',
+        },
+        {
+          q: 'Apakah transfer hotel termasuk?',
+          a: 'Ya pada paket yang tertera (mobil privat). Zona jemput bisa berbeda — konfirmasi area hotel via WhatsApp.',
+        },
+        {
+          q: 'Pakai apa?',
+          a: 'Sepatu tertutup, baju yang boleh kotor, dan baju ganti. Shower serta locker tersedia di base.',
         },
         {
           q: 'Bolehkah anak ikut?',
-          a: 'Anak usia 7 tahun ke atas boleh ikut didampingi orang dewasa. Sebutkan usia saat booking.',
-        },
-        {
-          q: 'Harus bisa berenang?',
-          a: 'Nyaman di air membantu, tapi life jacket wajib. Beritahu guide jika Anda gugup di air.',
-        },
-        {
-          q: 'Bagaimana jika hujan?',
-          a: 'Rafting biasanya tetap jalan saat hujan ringan. Dijeda atau dijadwal ulang hanya jika kondisi sungai tidak aman.',
+          a: 'Ya, biasanya sebagai penumpang. Sebutkan usia saat booking agar kami siapkan ATV yang sesuai.',
         },
         {
           q: 'Bagaimana cancel atau reschedule?',
-          a: 'Hubungi kami via WhatsApp sedini mungkin. Kami bantu reschedule sesuai ketersediaan. Cancel di hari yang sama mungkin tidak bisa disesuaikan.',
-        },
-        {
-          q: 'Apa yang harus dibawa?',
-          a: 'Baju renang, baju ganti, sandal bertali, sunscreen, dan sedikit uang tunai untuk tip. Locker tersedia di base.',
+          a: 'Hubungi kami via WhatsApp sedini mungkin. Kami bantu reschedule sesuai ketersediaan.',
         },
       ],
     },
     location: {
-      title: 'Lokasi kegiatan',
-      lead: 'Temui kami di Kedewatan, Ubud — dekat jurang Sungai Ayung.',
-      addressLabel: 'Alamat',
+      title: 'Lokasi riding',
+      lead: 'Base ATV di sekitar Ubud dan pantai — plus kantor marketing di Denpasar.',
+      addressLabel: 'Kantor marketing',
       openMaps: 'Buka di Google Maps',
-      ownTransportTitle: 'Datang dengan transportasi sendiri?',
-      ownTransportText:
-        'Arahkan pin ke alamat Kedewatan kami dan datang 15–20 menit lebih awal untuk check-in. Parkir tersedia dekat base. Jika tersesat, WhatsApp kami — kami akan pandu Anda.',
+      areasTitle: 'Area kegiatan',
+      areas: [
+        {
+          name: 'North Ubud',
+          text: 'Jalur pedesaan lebih panjang dan pemandangan North Ubud.',
+        },
+        {
+          name: 'South Ubud',
+          text: 'Jalur sawah dan desa paling populer — paling banyak dibooking.',
+        },
+        {
+          name: 'Pantai',
+          text: 'Rute ATV pesisir dengan jalur pasir dan angin laut.',
+        },
+      ],
+      tipTitle: 'Cara ke lokasi',
+      tipText:
+        'Jemputan hotel termasuk di paket. Jika datang sendiri, WhatsApp kami untuk titik temu tur yang Anda pilih.',
     },
     contact: {
       title: 'Siap kapan Anda siap',
       lead: 'Chat WhatsApp untuk konfirmasi tercepat — atau kirim inquiry singkat dan kami balas ketersediaan.',
       phone: 'WhatsApp / Telepon',
       email: 'Email',
-      base: 'Base kegiatan',
+      base: 'Kantor marketing',
       chat: 'Chat di WhatsApp',
       name: 'Nama',
       date: 'Tanggal pilihan',
@@ -883,10 +921,10 @@ export const dictionaries: Record<Lang, Dictionary> = {
       inquiryNote: 'Catatan',
     },
     footer: {
-      tag: 'Petualangan ATV & white water rafting di Bali.',
+      tag: 'Petualangan ATV di jalur Ubud dan pantai Bali.',
       made: 'Wild ATV Bali. Made in Bali.',
     },
-    waGeneric: 'Halo! Saya ingin booking di Wild ATV Bali.',
+    waGeneric: 'Halo! Saya ingin booking tur ATV di Wild ATV Bali.',
     waQuestion: 'Halo! Saya punya pertanyaan untuk Wild ATV Bali.',
     waFloat: 'Chat via WhatsApp',
   },

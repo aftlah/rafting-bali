@@ -23,7 +23,7 @@ export function AboutPage() {
         <div className="absolute inset-0 bg-forest/75" />
         <div className="container-site relative py-16 md:py-24">
           <p className="text-sm font-bold tracking-wider text-mint uppercase">
-            Ubud Ayung Rafting
+            Wild ATV Bali
           </p>
           <h1 className="mt-3 max-w-2xl font-display text-[clamp(2.2rem,5vw,3.5rem)] font-semibold tracking-tight">
             {a.title}

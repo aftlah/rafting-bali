@@ -231,8 +231,8 @@ const sharedDetailId = {
 
 export const dictionaries: Record<Lang, Dictionary> = {
   en: {
-    brand: 'Ubud Ayung',
-    brandSub: 'Rafting',
+    brand: 'Wild ATV',
+    brandSub: 'Bali',
     nav: {
       packages: 'Packages',
       experience: 'Experience',
@@ -245,7 +245,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
     },
     lang: { en: 'EN', id: 'ID', label: 'Language' },
     hero: {
-      brand: 'Ubud Ayung Rafting',
+      brand: 'Wild ATV Bali',
       title: 'Ride Bali’s wildest river gorge',
       lead: 'White water rafting on the Ayung — rainforest walls, waterfalls, and guides who know every rapid.',
       ctaBook: 'Book on WhatsApp',
@@ -294,7 +294,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
             'Insurance, service & tax',
           ],
           message:
-            'Hi! I want to book Ayung Rafting with Own Transport (from IDR 310.000).',
+            'Hi! I want to book Own Transport with Wild ATV Bali (from IDR 310.000).',
           longDescription:
             'Come with your own transport and join Ayung white water rafting with a full set of gear, guide, lunch, and facilities at the base.',
         },
@@ -313,7 +313,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
             'Insurance, service & tax',
           ],
           message:
-            'Hi! I want to book Ayung Rafting with Ubud Private Transfer (from IDR 415.000).',
+            'Hi! I want to book Ubud Private Transfer with Wild ATV Bali (from IDR 415.000).',
           longDescription:
             'Private transfer from your Ubud hotel, then raft the Ayung with guide, lunch, and all safety equipment included.',
         },
@@ -332,7 +332,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
             'Insurance, service & tax',
           ],
           message:
-            'Hi! I want to book Ayung Rafting with Outside Ubud Private Transfer (from IDR 520.000).',
+            'Hi! I want to book Outside Ubud Private Transfer with Wild ATV Bali (from IDR 520.000).',
           longDescription:
             'Door-to-door private transfer from outside Ubud, plus the full Ayung rafting experience with lunch and facilities.',
         },
@@ -343,7 +343,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
         blurb:
           'Quad bike through jungle trails, then ride the river — one unforgettable Bali day.',
         message:
-          'Hi! I want to book the Combo Bali ATV Quad Bike and Ayung White Water Rafting (from IDR 895.000).',
+          'Hi! I want to book the Combo Bali ATV Quad Bike and Ayung White Water Rafting with Wild ATV Bali (from IDR 895.000).',
         ask: 'Ask about the combo',
       },
     },
@@ -553,16 +553,16 @@ export const dictionaries: Record<Lang, Dictionary> = {
       inquiryNote: 'Note',
     },
     footer: {
-      tag: 'White water rafting in the heart of Bali.',
-      made: 'Ubud Ayung Rafting. Made in Bali.',
+      tag: 'ATV adventures & white water rafting in Bali.',
+      made: 'Wild ATV Bali. Made in Bali.',
     },
-    waGeneric: 'Hi! I want to book Ayung Rafting.',
-    waQuestion: 'Hi! I have a question about Ayung Rafting.',
+    waGeneric: 'Hi! I want to book with Wild ATV Bali.',
+    waQuestion: 'Hi! I have a question for Wild ATV Bali.',
     waFloat: 'Chat on WhatsApp',
   },
   id: {
-    brand: 'Ubud Ayung',
-    brandSub: 'Rafting',
+    brand: 'Wild ATV',
+    brandSub: 'Bali',
     nav: {
       packages: 'Paket',
       experience: 'Pengalaman',
@@ -575,7 +575,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
     },
     lang: { en: 'EN', id: 'ID', label: 'Bahasa' },
     hero: {
-      brand: 'Ubud Ayung Rafting',
+      brand: 'Wild ATV Bali',
       title: 'Jelajahi jurang sungai liar di Bali',
       lead: 'Arung jeram di Sungai Ayung — tebing hutan, air terjun, dan guide yang mengenal setiap jeram.',
       ctaBook: 'Booking via WhatsApp',
@@ -624,7 +624,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
             'Asuransi, service & pajak',
           ],
           message:
-            'Halo! Saya ingin booking Ayung Rafting dengan Transportasi Sendiri (mulai IDR 310.000).',
+            'Halo! Saya ingin booking Transportasi Sendiri di Wild ATV Bali (mulai IDR 310.000).',
           longDescription:
             'Datang dengan transportasi sendiri dan nikmati rafting Ayung lengkap dengan perlengkapan, guide, makan siang, dan fasilitas di base.',
         },
@@ -643,7 +643,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
             'Asuransi, service & pajak',
           ],
           message:
-            'Halo! Saya ingin booking Ayung Rafting dengan Transfer Privat Ubud (mulai IDR 415.000).',
+            'Halo! Saya ingin booking Transfer Privat Ubud di Wild ATV Bali (mulai IDR 415.000).',
           longDescription:
             'Transfer privat dari hotel Ubud, lalu rafting di Ayung dengan guide, makan siang, dan seluruh peralatan keselamatan.',
         },
@@ -662,7 +662,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
             'Asuransi, service & pajak',
           ],
           message:
-            'Halo! Saya ingin booking Ayung Rafting dengan Transfer Luar Ubud (mulai IDR 520.000).',
+            'Halo! Saya ingin booking Transfer Luar Ubud di Wild ATV Bali (mulai IDR 520.000).',
           longDescription:
             'Transfer privat door-to-door dari luar Ubud, plus pengalaman rafting Ayung lengkap dengan makan dan fasilitas.',
         },
@@ -673,7 +673,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
         blurb:
           'ATV menyusuri jalur hutan, lalu arung jeram — satu hari Bali yang tak terlupakan.',
         message:
-          'Halo! Saya ingin booking Combo ATV Quad Bike dan Ayung White Water Rafting (mulai IDR 895.000).',
+          'Halo! Saya ingin booking Combo ATV Quad Bike dan Ayung White Water Rafting di Wild ATV Bali (mulai IDR 895.000).',
         ask: 'Tanya tentang combo',
       },
     },
@@ -883,11 +883,11 @@ export const dictionaries: Record<Lang, Dictionary> = {
       inquiryNote: 'Catatan',
     },
     footer: {
-      tag: 'White water rafting di jantung Bali.',
-      made: 'Ubud Ayung Rafting. Made in Bali.',
+      tag: 'Petualangan ATV & white water rafting di Bali.',
+      made: 'Wild ATV Bali. Made in Bali.',
     },
-    waGeneric: 'Halo! Saya ingin booking Ayung Rafting.',
-    waQuestion: 'Halo! Saya punya pertanyaan tentang Ayung Rafting.',
+    waGeneric: 'Halo! Saya ingin booking di Wild ATV Bali.',
+    waQuestion: 'Halo! Saya punya pertanyaan untuk Wild ATV Bali.',
     waFloat: 'Chat via WhatsApp',
   },
 }

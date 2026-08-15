@@ -1,8 +1,8 @@
-# Ubud Ayung Rafting
+# Wild ATV Bali
 
-Website marketing & booking untuk operator **white water rafting di Sungai Ayung, Ubud, Bali**.
+Website marketing & booking untuk **Wild ATV Bali** — petualangan ATV dan white water rafting di Bali (termasuk Sungai Ayung, Ubud).
 
-Situs ini menampilkan paket tur rafting, promo combo ATV, galeri aktivitas, testimoni, FAQ, peta lokasi, dan booking via **WhatsApp**. Tampilan modern dengan bahasa **EN / ID**.
+Situs ini menampilkan paket tur, promo combo ATV + rafting, galeri, testimoni, FAQ, peta lokasi, dan booking via **WhatsApp**. Tampilan modern dengan bahasa **EN / ID**.
 
 ## Fitur
 

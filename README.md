@@ -6,12 +6,14 @@ Situs ini menampilkan paket tur rafting, promo combo ATV, galeri aktivitas, test
 
 ## Fitur
 
-- Landing page lengkap (hero, why us, packages, experience, gallery, reviews)
+- Landing page lengkap (hero, trust bar, why us, packages, experience, gallery, reviews)
 - **Halaman detail paket** (`/packages/:id`) — itinerary, included/not included, usia, tangga, tingkat jeram
-- **FAQ** accordion
-- **Peta lokasi** Google Maps + petunjuk own transport
-- **Bahasa EN / ID** (toggle di navbar, tersimpan di localStorage)
-- **Analytics opsional** — Google Analytics 4 & Meta Pixel via `.env`
+- **About & safety** (`/about`) — tim, keselamatan, peralatan
+- **Gallery** filter + lightbox
+- **FAQ** accordion + **peta lokasi**
+- Sticky **WhatsApp** button
+- **Bahasa EN / ID** (toggle di navbar)
+- **Analytics opsional** — GA4 & Meta Pixel via `.env`
 
 ## Menjalankan lokal
 

@@ -15,6 +15,7 @@ export function Header() {
     { href: onHome ? '#packages' : '/#packages', label: t.nav.packages },
     { href: onHome ? '#experience' : '/#experience', label: t.nav.experience },
     { href: onHome ? '#gallery' : '/#gallery', label: t.nav.gallery },
+    { href: '/about', label: t.nav.about, isRoute: true },
     { href: onHome ? '#faq' : '/#faq', label: t.nav.faq },
     { href: onHome ? '#location' : '/#location', label: t.nav.location },
     { href: onHome ? '#contact' : '/#contact', label: t.nav.contact },
@@ -95,15 +96,25 @@ export function Header() {
           </Link>
 
           <nav className="hidden items-center gap-5 xl:flex" aria-label="Primary">
-            {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-[0.92rem] font-medium text-white/86 hover:text-white"
-              >
-                {link.label}
-              </a>
-            ))}
+            {links.map((link) =>
+              'isRoute' in link && link.isRoute ? (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="text-[0.92rem] font-medium text-white/86 hover:text-white"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-[0.92rem] font-medium text-white/86 hover:text-white"
+                >
+                  {link.label}
+                </a>
+              ),
+            )}
             <LangSwitch />
             <a
               className={btnPrimary}
@@ -155,17 +166,29 @@ export function Header() {
         aria-hidden={!open}
       >
         <nav className="mx-auto mt-8 flex max-w-sm flex-col gap-1.5" aria-label="Mobile">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              tabIndex={open ? 0 : -1}
-              className="block border-b border-line-light py-4 font-display text-2xl font-semibold text-white"
-              onClick={() => setOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
+          {links.map((link) =>
+            'isRoute' in link && link.isRoute ? (
+              <Link
+                key={link.href}
+                to={link.href}
+                tabIndex={open ? 0 : -1}
+                className="block border-b border-line-light py-4 font-display text-2xl font-semibold text-white"
+                onClick={() => setOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                tabIndex={open ? 0 : -1}
+                className="block border-b border-line-light py-4 font-display text-2xl font-semibold text-white"
+                onClick={() => setOpen(false)}
+              >
+                {link.label}
+              </a>
+            ),
+          )}
           <a
             className={`${btnPrimary} mt-6 w-full`}
             href={waLink(t.waGeneric)}

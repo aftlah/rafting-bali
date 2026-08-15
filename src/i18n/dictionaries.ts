@@ -18,6 +18,7 @@ export type Dictionary = {
     packages: string
     experience: string
     gallery: string
+    about: string
     faq: string
     location: string
     contact: string
@@ -78,7 +79,38 @@ export type Dictionary = {
     lead: string
     steps: { n: string; title: string; text: string }[]
   }
-  gallery: { title: string; lead: string; alt: string }
+  gallery: {
+    title: string
+    lead: string
+    alt: string
+    filters: {
+      all: string
+      rafting: string
+      nature: string
+      facilities: string
+    }
+    close: string
+    prev: string
+    next: string
+  }
+  trust: {
+    items: { id: string; title: string; text: string }[]
+  }
+  about: {
+    title: string
+    lead: string
+    introTitle: string
+    intro: string
+    teamTitle: string
+    teamLead: string
+    team: { role: string; text: string }[]
+    safetyTitle: string
+    safetyLead: string
+    safety: { title: string; text: string }[]
+    gearTitle: string
+    gear: string[]
+    cta: string
+  }
   reviews: {
     title: string
     lead: string
@@ -126,6 +158,7 @@ export type Dictionary = {
   }
   waGeneric: string
   waQuestion: string
+  waFloat: string
 }
 
 const sharedDetailEn = {
@@ -204,6 +237,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       packages: 'Packages',
       experience: 'Experience',
       gallery: 'Gallery',
+      about: 'About',
       faq: 'FAQ',
       location: 'Location',
       contact: 'Contact',
@@ -352,6 +386,88 @@ export const dictionaries: Record<Lang, Dictionary> = {
       title: 'On the water',
       lead: 'Moments from the gorge — replace these placeholders with your own shoot.',
       alt: 'Ayung rafting gallery',
+      filters: {
+        all: 'All',
+        rafting: 'Rafting',
+        nature: 'Nature',
+        facilities: 'Facilities',
+      },
+      close: 'Close',
+      prev: 'Previous photo',
+      next: 'Next photo',
+    },
+    trust: {
+      items: [
+        {
+          id: 'nib',
+          title: 'Registered business',
+          text: 'NIB on file — book with a licensed Bali operator.',
+        },
+        {
+          id: 'insurance',
+          title: 'Rafting insurance',
+          text: 'Coverage included on every package for peace of mind.',
+        },
+        {
+          id: 'payment',
+          title: 'Pay on arrival',
+          text: 'Cash, debit, or credit card — no awkward upfront transfer.',
+        },
+        {
+          id: 'rating',
+          title: 'Guest rated 4.9',
+          text: 'Trusted by travelers who booked direct with us.',
+        },
+      ],
+    },
+    about: {
+      title: 'About & safety',
+      lead: 'The people, gear, and standards behind every Ayung run.',
+      introTitle: 'Built for the river',
+      intro:
+        'We run white water rafting on Bali’s Ayung River with local guides, clear safety briefings, and facilities ready when you finish paddling. Our goal is simple: an exciting day that still feels well looked after.',
+      teamTitle: 'Our team',
+      teamLead: 'Experienced Balinese guides who know the gorge line by line.',
+      team: [
+        {
+          role: 'River guides',
+          text: 'English-speaking guides lead every raft, manage rapids, and keep the energy high but controlled.',
+        },
+        {
+          role: 'Base crew',
+          text: 'Check-in, lockers, gear fitting, and lunch service so your day flows without friction.',
+        },
+        {
+          role: 'Drivers',
+          text: 'Private transfer drivers for Ubud and outside-Ubud pickups — on time and easy to reach by WhatsApp.',
+        },
+      ],
+      safetyTitle: 'Safety first',
+      safetyLead: 'Briefing, gear, and conditions checks before anyone hits the water.',
+      safety: [
+        {
+          title: 'Mandatory briefing',
+          text: 'Every guest gets paddle commands, swim protocol, and rapid etiquette before launch.',
+        },
+        {
+          title: 'Certified gear',
+          text: 'Helmets and life jackets for all guests — fitted at the base before the descent.',
+        },
+        {
+          title: 'River judgment',
+          text: 'If water levels are unsafe, we delay or reschedule. Thrill never beats safety.',
+        },
+      ],
+      gearTitle: 'Equipment & facilities',
+      gear: [
+        'Helmet & life jacket',
+        'Paddle & raft',
+        'Locker & change room',
+        'Towel & hot shower',
+        'Indonesian lunch',
+        'On-river insurance coverage',
+      ],
+      cta: 'Ask about safety or booking',
     },
     reviews: {
       title: 'Guests keep coming back',
@@ -442,6 +558,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
     },
     waGeneric: 'Hi! I want to book Ayung Rafting.',
     waQuestion: 'Hi! I have a question about Ayung Rafting.',
+    waFloat: 'Chat on WhatsApp',
   },
   id: {
     brand: 'Ubud Ayung',
@@ -450,6 +567,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       packages: 'Paket',
       experience: 'Pengalaman',
       gallery: 'Galeri',
+      about: 'Tentang',
       faq: 'FAQ',
       location: 'Lokasi',
       contact: 'Kontak',
@@ -598,6 +716,88 @@ export const dictionaries: Record<Lang, Dictionary> = {
       title: 'Di atas air',
       lead: 'Momen di jurang — ganti placeholder ini dengan foto asli Anda.',
       alt: 'Galeri rafting Ayung',
+      filters: {
+        all: 'Semua',
+        rafting: 'Rafting',
+        nature: 'Alam',
+        facilities: 'Fasilitas',
+      },
+      close: 'Tutup',
+      prev: 'Foto sebelumnya',
+      next: 'Foto berikutnya',
+    },
+    trust: {
+      items: [
+        {
+          id: 'nib',
+          title: 'Usaha terdaftar',
+          text: 'NIB tersedia — booking dengan operator Bali berizin.',
+        },
+        {
+          id: 'insurance',
+          title: 'Asuransi rafting',
+          text: 'Perlindungan termasuk di setiap paket untuk ketenangan Anda.',
+        },
+        {
+          id: 'payment',
+          title: 'Bayar saat tiba',
+          text: 'Tunai, debit, atau kartu kredit — tanpa transfer di muka.',
+        },
+        {
+          id: 'rating',
+          title: 'Rating tamu 4.9',
+          text: 'Dipercaya traveler yang booking langsung dengan kami.',
+        },
+      ],
+    },
+    about: {
+      title: 'Tentang & keselamatan',
+      lead: 'Tim, peralatan, dan standar di balik setiap perjalanan Ayung.',
+      introTitle: 'Dibangun untuk sungai',
+      intro:
+        'Kami menjalankan white water rafting di Sungai Ayung Bali dengan guide lokal, briefing keselamatan yang jelas, dan fasilitas siap saat Anda selesai dayung. Tujuannya sederhana: hari yang seru sekaligus terurus dengan baik.',
+      teamTitle: 'Tim kami',
+      teamLead: 'Guide Bali berpengalaman yang mengenal jurang dari ujung ke ujung.',
+      team: [
+        {
+          role: 'Guide sungai',
+          text: 'Guide berbahasa Inggris memimpin setiap perahu, mengatur jeram, dan menjaga energi tetap aman.',
+        },
+        {
+          role: 'Kru base',
+          text: 'Check-in, locker, pemasangan gear, dan layanan makan siang agar hari berjalan lancar.',
+        },
+        {
+          role: 'Driver',
+          text: 'Driver transfer privat untuk jemputan Ubud dan luar Ubud — tepat waktu dan mudah dihubungi via WhatsApp.',
+        },
+      ],
+      safetyTitle: 'Keselamatan utama',
+      safetyLead: 'Briefing, peralatan, dan cek kondisi sebelum siapa pun masuk air.',
+      safety: [
+        {
+          title: 'Briefing wajib',
+          text: 'Setiap tamu mendapat perintah dayung, protokol berenang, dan etika jeram sebelum mulai.',
+        },
+        {
+          title: 'Peralatan standar',
+          text: 'Helm dan life jacket untuk semua tamu — dipasang di base sebelum turun ke sungai.',
+        },
+        {
+          title: 'Keputusan sungai',
+          text: 'Jika level air tidak aman, kami tunda atau jadwalkan ulang. Keseruan tidak mengalahkan keselamatan.',
+        },
+      ],
+      gearTitle: 'Peralatan & fasilitas',
+      gear: [
+        'Helm & life jacket',
+        'Dayung & perahu',
+        'Locker & ruang ganti',
+        'Handuk & shower hangat',
+        'Makan siang Indonesia',
+        'Asuransi kegiatan di sungai',
+      ],
+      cta: 'Tanya soal keselamatan atau booking',
     },
     reviews: {
       title: 'Tamu senang kembali lagi',
@@ -688,5 +888,6 @@ export const dictionaries: Record<Lang, Dictionary> = {
     },
     waGeneric: 'Halo! Saya ingin booking Ayung Rafting.',
     waQuestion: 'Halo! Saya punya pertanyaan tentang Ayung Rafting.',
+    waFloat: 'Chat via WhatsApp',
   },
 }

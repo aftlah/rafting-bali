@@ -67,12 +67,14 @@ export function Contact() {
               >
                 {PHONE_DISPLAY}
               </a>
-              <a
-                className="mt-0.5 block font-medium text-forest"
-                href={`tel:${PHONE_ALT.replace(/\s|-/g, '')}`}
-              >
-                {PHONE_ALT}
-              </a>
+              {PHONE_ALT ? (
+                <a
+                  className="mt-0.5 block font-medium text-forest"
+                  href={`tel:${PHONE_ALT.replace(/\s|-/g, '')}`}
+                >
+                  {PHONE_ALT}
+                </a>
+              ) : null}
             </li>
             <li>
               <span className="mb-1 block text-[0.75rem] font-bold tracking-wider text-river uppercase">

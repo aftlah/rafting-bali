@@ -1,7 +1,7 @@
-export const WHATSAPP = '6282235358349'
-export const PHONE_DISPLAY = '+62 822-3535-8349'
-export const PHONE_ALT = '+62 812-2866-2972'
-export const EMAIL = 'info@baliatvubud.com'
+export const WHATSAPP = '6285737292988'
+export const PHONE_DISPLAY = '+62 857-3729-2988'
+export const PHONE_ALT: string = ''
+export const EMAIL = 'putu.karang2609@gmail.com'
 export const ADDRESS =
   'Jalan Tegal Harum No. 5, Kesiman Kertalangu, Denpasar Timur, Denpasar, Bali 80237'
 export const COMPANY = 'Wild ATV Bali'

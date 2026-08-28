@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
+import { PackageDetailSections } from '../components/package-detail/PackageDetailSections'
 import { packageMeta, waLink, type PackageId } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import { btnPrimary, section } from '../lib/styles'
@@ -57,90 +58,7 @@ export function PackageDetailPage() {
             {d.bookThis}
           </a>
 
-          <div className="mt-12 grid gap-10 lg:grid-cols-2">
-            <div>
-              <h2 className="mb-4 font-display text-2xl font-semibold text-forest">
-                {d.itinerary}
-              </h2>
-              <ol className="grid gap-4">
-                {d.sharedItinerary.map((step, i) => (
-                  <li key={step.title} className="border-l-2 border-river pl-4">
-                    <p className="text-xs font-bold tracking-wider text-river uppercase">
-                      {String(i + 1).padStart(2, '0')}
-                    </p>
-                    <h3 className="mt-1 font-semibold text-forest">{step.title}</h3>
-                    <p className="mt-1 text-muted">{step.text}</p>
-                  </li>
-                ))}
-              </ol>
-            </div>
-
-            <div className="grid gap-8">
-              <div>
-                <h2 className="mb-4 font-display text-2xl font-semibold text-forest">
-                  {d.included}
-                </h2>
-                <ul className="grid gap-2">
-                  {pkg.includes.map((item) => (
-                    <li
-                      key={item}
-                      className="relative pl-[1.1rem] text-muted before:absolute before:top-2 before:left-0 before:size-1.5 before:rounded-full before:bg-river-bright"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h2 className="mb-4 font-display text-2xl font-semibold text-forest">
-                  {d.notIncluded}
-                </h2>
-                <ul className="grid gap-2">
-                  {d.sharedNotIncluded.map((item) => (
-                    <li
-                      key={item}
-                      className="relative pl-[1.1rem] text-muted before:absolute before:top-2 before:left-0 before:size-1.5 before:rounded-full before:bg-accent/70"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 border border-line bg-white p-6 md:p-8">
-            <h2 className="mb-6 font-display text-2xl font-semibold text-forest">
-              {d.goodToKnow}
-            </h2>
-            <dl className="grid gap-5 sm:grid-cols-2">
-              <div>
-                <dt className="text-xs font-bold tracking-wider text-river uppercase">
-                  {d.duration}
-                </dt>
-                <dd className="mt-1 text-forest">{d.facts.duration}</dd>
-              </div>
-              <div>
-                <dt className="text-xs font-bold tracking-wider text-river uppercase">
-                  {d.difficulty}
-                </dt>
-                <dd className="mt-1 text-forest">{d.facts.difficulty}</dd>
-              </div>
-              <div>
-                <dt className="text-xs font-bold tracking-wider text-river uppercase">
-                  {d.minAge}
-                </dt>
-                <dd className="mt-1 text-forest">{d.facts.minAge}</dd>
-              </div>
-              <div>
-                <dt className="text-xs font-bold tracking-wider text-river uppercase">
-                  {d.note}
-                </dt>
-                <dd className="mt-1 text-forest">{d.facts.note}</dd>
-              </div>
-            </dl>
-          </div>
+          <PackageDetailSections packageId={id} includes={pkg.includes} />
         </div>
       </section>
     </main>

@@ -13,18 +13,18 @@ export const PHONE_DISPLAY = '+62 857-3729-2988'
 export const PHONE_ALT: string = ''
 export const EMAIL = 'putu.karang2609@gmail.com'
 export const ADDRESS =
-  'Jalan Tegal Harum No. 5, Kesiman Kertalangu, Denpasar Timur, Denpasar, Bali 80237'
+  'Jl. Begawan Giri, Melinggih Kelod, Kec. Payangan, Kabupaten Gianyar, Bali 80572'
 export const COMPANY = 'Wild ATV Bali'
 export const NIB = ''
 export const RATING = '4.9'
 export const REVIEW_COUNT = '150+'
 
-/** Marketing office / Ubud area map */
+/** Activity base — Payangan, Gianyar */
 export const MAP_EMBED_URL =
-  'https://maps.google.com/maps?q=Jalan%20Tegal%20Harum%20No.%205%20Kesiman%20Kertalangu%20Denpasar%20Bali&z=14&output=embed'
+  'https://maps.google.com/maps?q=Jl.+Begawan+Giri,+Melinggih+Kelod,+Payangan,+Gianyar,+Bali+80572&z=14&output=embed'
 
 export const MAP_LINK =
-  'https://www.google.com/maps/search/?api=1&query=Jalan+Tegal+Harum+No.+5+Kesiman+Kertalangu+Denpasar+Bali'
+  'https://www.google.com/maps/search/?api=1&query=Jl.+Begawan+Giri,+Melinggih+Kelod,+Payangan,+Gianyar,+Bali+80572'
 
 export function waLink(message: string) {
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`
@@ -56,7 +56,13 @@ export type GalleryItem = {
 }
 
 export const images = {
-  hero: foto1,
+  /** High-res hero in /public/images (1350px). Local foto-atv files are only ~1024px. */
+  hero: '/images/hero.webp',
+  heroSrcSet: [
+    { src: '/images/hero-980.webp', width: 980 },
+    { src: '/images/hero-1280.webp', width: 1280 },
+    { src: '/images/hero.webp', width: 1350 },
+  ],
   combo: foto3,
   about: foto2,
   gallery: [

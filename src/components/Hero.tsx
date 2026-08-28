@@ -13,16 +13,19 @@ export function Hero() {
     >
       <div className="absolute inset-0" aria-hidden="true">
         <img
-          src={images.hero}
+          src={images.heroSrcSet[0].src}
+          srcSet={images.heroSrcSet.map(({ src, width }) => `${src} ${width}w`).join(', ')}
+          sizes="100vw"
           alt=""
-          width={2400}
-          height={1600}
+          width={1350}
+          height={515}
           fetchPriority="high"
-          className="animate-drift h-full w-full scale-[1.04] object-cover"
+          decoding="async"
+          className="size-full max-w-none object-cover object-center"
         />
       </div>
       <div
-        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,24,21,0.35)_0%,rgba(8,24,21,0.15)_35%,rgba(8,24,21,0.82)_100%),linear-gradient(90deg,rgba(8,24,21,0.55)_0%,transparent_55%)]"
+        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,24,21,0.28)_0%,rgba(8,24,21,0.1)_35%,rgba(8,24,21,0.75)_100%),linear-gradient(90deg,rgba(8,24,21,0.45)_0%,transparent_55%)]"
         aria-hidden="true"
       />
 

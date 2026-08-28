@@ -1,3 +1,4 @@
+import { useState, type ReactNode } from 'react'
 import {
   beachPickupSlots,
   beachPrices,
@@ -9,6 +10,7 @@ import {
 import type { PackageId } from '../../data/site'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { packageDetailContent } from '../../i18n/packageDetailContent'
+import { sectionTitle } from '../../lib/styles'
 import { DetailAccordion } from './DetailAccordion'
 
 type PackageDetailSectionsProps = {
@@ -16,7 +18,17 @@ type PackageDetailSectionsProps = {
   includes: string[]
 }
 
-function PriceLine({
+type AccordionId = 'pickup' | 'itinerary' | 'bring' | 'info' | 'terms'
+
+function ListItem({ children }: { children: ReactNode }) {
+  return (
+    <li className="relative pl-[1.1rem] before:absolute before:top-2 before:left-0 before:size-1.5 before:rounded-full before:bg-river-bright">
+      {children}
+    </li>
+  )
+}
+
+function PriceTier({
   label,
   single,
   tandem,
@@ -28,20 +40,35 @@ function PriceLine({
   labels: (typeof packageDetailContent)['en']['labels']
 }) {
   return (
-    <div className="text-center">
-      <p className="font-semibold text-river">{label}</p>
-      <p className="mt-2 text-accent">
-        {labels.single} IDR {single}
-        {labels.perPerson}
-      </p>
-      <p className="mt-1 text-accent">
-        {labels.tandem} IDR {tandem} {labels.twoPersons}
-      </p>
+    <div className="border border-line bg-foam/50 p-5">
+      <h3 className="text-[0.8rem] font-bold tracking-wider text-river uppercase">
+        {label}
+      </h3>
+      <dl className="mt-4 grid gap-4 sm:grid-cols-2">
+        <div>
+          <dt className="text-xs font-semibold text-muted">{labels.single}</dt>
+          <dd className="mt-1 font-display text-xl font-semibold text-forest">
+            IDR {single}
+            <span className="text-sm font-sans font-normal text-muted">
+              {labels.perPerson}
+            </span>
+          </dd>
+        </div>
+        <div>
+          <dt className="text-xs font-semibold text-muted">{labels.tandem}</dt>
+          <dd className="mt-1 font-display text-xl font-semibold text-forest">
+            IDR {tandem}
+            <span className="ml-1 text-sm font-sans font-normal text-muted">
+              {labels.twoPersons}
+            </span>
+          </dd>
+        </div>
+      </dl>
     </div>
   )
 }
 
-function PickupBlock({
+function PickupSchedule({
   title,
   slots,
   areaLabels,
@@ -51,18 +78,54 @@ function PickupBlock({
   areaLabels: Record<string, string>
 }) {
   return (
-    <div>
-      <p className="font-semibold text-forest">{title}</p>
-      <ul className="mt-2 grid gap-1.5">
+    <div className="border border-line bg-foam/40">
+      <p className="border-b border-line bg-white px-4 py-3 text-sm font-bold tracking-wider text-forest uppercase">
+        {title}
+      </p>
+      <ul className="divide-y divide-line">
         {slots.map((slot) => (
-          <li key={`${title}-${slot.areaKey}`} className="text-muted">
-            <span className="font-medium text-forest">
-              {areaLabels[slot.areaKey]}:
-            </span>{' '}
-            {slot.time}
+          <li
+            key={`${title}-${slot.areaKey}`}
+            className="flex items-center justify-between gap-4 px-4 py-2.5 text-sm"
+          >
+            <span className="text-forest">{areaLabels[slot.areaKey]}</span>
+            <span className="shrink-0 font-medium text-river">{slot.time}</span>
           </li>
         ))}
       </ul>
+    </div>
+  )
+}
+
+function ItineraryTimeline({
+  label,
+  steps,
+}: {
+  label: string
+  steps: { time: string; text: string }[]
+}) {
+  return (
+    <div className="border border-line bg-white p-5">
+      <h3 className="font-display text-lg font-semibold text-forest">{label}</h3>
+      <ol className="mt-4 grid gap-0">
+        {steps.map((step, i) => (
+          <li
+            key={`${label}-${step.time}`}
+            className={`relative border-l-2 border-river/35 pb-5 pl-5 last:pb-0 ${
+              i === steps.length - 1 ? 'border-l-transparent' : ''
+            }`}
+          >
+            <span
+              className="absolute top-0 -left-[5px] size-2 rounded-full bg-river-bright"
+              aria-hidden="true"
+            />
+            <p className="text-xs font-bold tracking-wider text-river uppercase">
+              {step.time}
+            </p>
+            <p className="mt-1 text-sm leading-relaxed text-muted">{step.text}</p>
+          </li>
+        ))}
+      </ol>
     </div>
   )
 }
@@ -75,183 +138,179 @@ export function PackageDetailSections({
   const copy = packageDetailContent[lang]
   const { labels } = copy
   const pkgCopy = copy.packages[packageId]
-
   const ubud = isUbudPackage(packageId)
 
+  const [openSection, setOpenSection] = useState<AccordionId | null>('itinerary')
+
+  const toggle = (id: AccordionId) =>
+    setOpenSection((prev) => (prev === id ? null : id))
+
   return (
-    <div className="mt-12 grid gap-6">
-      <div className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-xl border-2 border-river-bright/70 bg-white p-6 text-center shadow-sm">
-          <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-full bg-river/10 text-river">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path
-                d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <circle cx="7" cy="7" r="1.5" fill="currentColor" />
-            </svg>
-          </div>
-          <h2 className="font-display text-xl font-semibold text-accent">
-            {labels.pricesTitle}
-          </h2>
-          <div className="mt-6 grid gap-6">
-            {ubud ? (
-              <>
-                <PriceLine
-                  label={labels.withoutTransfer}
-                  single={ubudPrices[packageId].withoutTransfer.single}
-                  tandem={ubudPrices[packageId].withoutTransfer.tandem}
-                  labels={labels}
-                />
-                <PriceLine
-                  label={labels.withUbudTransfer}
-                  single={ubudPrices[packageId].withUbudTransfer.single}
-                  tandem={ubudPrices[packageId].withUbudTransfer.tandem}
-                  labels={labels}
-                />
-                <PriceLine
-                  label={labels.withOutsideUbudTransfer}
-                  single={ubudPrices[packageId].withOutsideUbudTransfer.single}
-                  tandem={ubudPrices[packageId].withOutsideUbudTransfer.tandem}
-                  labels={labels}
-                />
-              </>
-            ) : (
-              <>
-                <PriceLine
-                  label={labels.withCangguTransfer}
-                  single={beachPrices.withCangguTransfer.single}
-                  tandem={beachPrices.withCangguTransfer.tandem}
-                  labels={labels}
-                />
-                <PriceLine
-                  label={labels.withOutsideCangguTransfer}
-                  single={beachPrices.withOutsideCangguTransfer.single}
-                  tandem={beachPrices.withOutsideCangguTransfer.tandem}
-                  labels={labels}
-                />
-              </>
-            )}
-          </div>
+    <div className="grid gap-12">
+      {/* Prices */}
+      <section>
+        <div className="mb-5">
+          <h2 className={sectionTitle}>{labels.pricesTitle}</h2>
+          <p className="mt-2 text-sm text-muted">{labels.minPersons}</p>
         </div>
-
-        <div className="rounded-xl border-2 border-river-bright/70 bg-white p-6 text-center shadow-sm">
-          <h2 className="font-display text-xl font-semibold text-accent">
-            {labels.includedTitle}
-          </h2>
-          <ul className="mt-6 grid gap-2 text-left text-muted">
-            {includes.map((item) => (
-              <li
-                key={item}
-                className="relative pl-5 before:absolute before:top-2.5 before:left-0 before:size-1.5 before:rounded-full before:bg-river-bright"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-          {ubud && (
-            <p className="mt-6 text-sm font-semibold text-accent">{labels.transferNote}</p>
-          )}
-        </div>
-      </div>
-
-      <DetailAccordion title={labels.pickUpTime}>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {ubud ? (
             <>
-              <PickupBlock
-                title={labels.morningTrip}
-                slots={ubudPickupSlots.morning}
-                areaLabels={copy.pickupAreas}
+              <PriceTier
+                label={labels.withoutTransfer}
+                single={ubudPrices[packageId].withoutTransfer.single}
+                tandem={ubudPrices[packageId].withoutTransfer.tandem}
+                labels={labels}
               />
-              <PickupBlock
-                title={labels.afternoonTrip}
-                slots={ubudPickupSlots.afternoon}
-                areaLabels={copy.pickupAreas}
+              <PriceTier
+                label={labels.withUbudTransfer}
+                single={ubudPrices[packageId].withUbudTransfer.single}
+                tandem={ubudPrices[packageId].withUbudTransfer.tandem}
+                labels={labels}
+              />
+              <PriceTier
+                label={labels.withOutsideUbudTransfer}
+                single={ubudPrices[packageId].withOutsideUbudTransfer.single}
+                tandem={ubudPrices[packageId].withOutsideUbudTransfer.tandem}
+                labels={labels}
               />
             </>
           ) : (
             <>
-              <PickupBlock
-                title={labels.morningTrip}
-                slots={beachPickupSlots.morning}
-                areaLabels={copy.pickupAreas}
+              <PriceTier
+                label={labels.withCangguTransfer}
+                single={beachPrices.withCangguTransfer.single}
+                tandem={beachPrices.withCangguTransfer.tandem}
+                labels={labels}
               />
-              <PickupBlock
-                title={labels.afternoonTrip}
-                slots={beachPickupSlots.afternoon}
-                areaLabels={copy.pickupAreas}
-              />
-              <PickupBlock
-                title={labels.sunsetTrip}
-                slots={beachPickupSlots.sunset}
-                areaLabels={copy.pickupAreas}
+              <PriceTier
+                label={labels.withOutsideCangguTransfer}
+                single={beachPrices.withOutsideCangguTransfer.single}
+                tandem={beachPrices.withOutsideCangguTransfer.tandem}
+                labels={labels}
               />
             </>
           )}
         </div>
-      </DetailAccordion>
+        {ubud ? (
+          <p className="mt-4 text-sm text-muted">
+            <span className="font-semibold text-forest">*</span> {labels.transferNote}
+          </p>
+        ) : null}
+      </section>
 
-      <DetailAccordion title={labels.itinerary}>
-        <div className="grid gap-8 lg:grid-cols-2">
-          {pkgCopy.schedules.map((schedule) => (
-            <div key={schedule.id}>
-              <p className="font-semibold text-forest">{schedule.label}</p>
-              <ul className="mt-3 grid gap-2">
-                {schedule.steps.map((step) => (
-                  <li key={`${schedule.id}-${step.time}`} className="text-muted">
-                    <span className="font-medium text-forest">{step.time}:</span>{' '}
-                    {step.text}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </DetailAccordion>
-
-      <DetailAccordion title={labels.whatToBring}>
-        <ul className="grid gap-2 sm:grid-cols-2">
-          {copy.whatToBring.map((item) => (
-            <li
-              key={item}
-              className="relative pl-5 text-muted before:absolute before:top-2.5 before:left-0 before:size-1.5 before:rounded-full before:bg-river-bright"
-            >
-              {item}
-            </li>
+      {/* Included */}
+      <section className="border border-line bg-white p-6 md:p-8">
+        <h2 className={sectionTitle}>{labels.includedTitle}</h2>
+        <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+          {includes.map((item) => (
+            <ListItem key={item}>{item}</ListItem>
           ))}
         </ul>
-      </DetailAccordion>
+      </section>
 
-      <DetailAccordion title={labels.additionalInfo}>
-        <ul className="grid gap-2">
-          {copy.additionalInfo.map((item) => (
-            <li
-              key={item}
-              className="relative pl-5 text-muted before:absolute before:top-2.5 before:left-0 before:size-1.5 before:rounded-full before:bg-river-bright"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-      </DetailAccordion>
+      {/* Accordions */}
+      <section className="grid gap-2">
+        <DetailAccordion
+          title={labels.pickUpTime}
+          open={openSection === 'pickup'}
+          onToggle={() => toggle('pickup')}
+        >
+          <div
+            className={`grid gap-4 ${
+              ubud ? 'md:grid-cols-2' : 'md:grid-cols-2 xl:grid-cols-3'
+            }`}
+          >
+            {ubud ? (
+              <>
+                <PickupSchedule
+                  title={labels.morningTrip}
+                  slots={ubudPickupSlots.morning}
+                  areaLabels={copy.pickupAreas}
+                />
+                <PickupSchedule
+                  title={labels.afternoonTrip}
+                  slots={ubudPickupSlots.afternoon}
+                  areaLabels={copy.pickupAreas}
+                />
+              </>
+            ) : (
+              <>
+                <PickupSchedule
+                  title={labels.morningTrip}
+                  slots={beachPickupSlots.morning}
+                  areaLabels={copy.pickupAreas}
+                />
+                <PickupSchedule
+                  title={labels.afternoonTrip}
+                  slots={beachPickupSlots.afternoon}
+                  areaLabels={copy.pickupAreas}
+                />
+                <PickupSchedule
+                  title={labels.sunsetTrip}
+                  slots={beachPickupSlots.sunset}
+                  areaLabels={copy.pickupAreas}
+                />
+              </>
+            )}
+          </div>
+        </DetailAccordion>
 
-      <DetailAccordion title={labels.termsConditions}>
-        <ul className="grid gap-2">
-          {copy.terms.map((item) => (
-            <li
-              key={item}
-              className="relative pl-5 text-muted before:absolute before:top-2.5 before:left-0 before:size-1.5 before:rounded-full before:bg-river-bright"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-        <p className="mt-4 text-sm font-semibold text-accent">{labels.groupBookingNote}</p>
-      </DetailAccordion>
+        <DetailAccordion
+          title={labels.itinerary}
+          open={openSection === 'itinerary'}
+          onToggle={() => toggle('itinerary')}
+        >
+          <div className="grid gap-4 lg:grid-cols-2">
+            {pkgCopy.schedules.map((schedule) => (
+              <ItineraryTimeline
+                key={schedule.id}
+                label={schedule.label}
+                steps={schedule.steps}
+              />
+            ))}
+          </div>
+        </DetailAccordion>
+
+        <DetailAccordion
+          title={labels.whatToBring}
+          open={openSection === 'bring'}
+          onToggle={() => toggle('bring')}
+        >
+          <ul className="grid gap-2 sm:grid-cols-2">
+            {copy.whatToBring.map((item) => (
+              <ListItem key={item}>{item}</ListItem>
+            ))}
+          </ul>
+        </DetailAccordion>
+
+        <DetailAccordion
+          title={labels.additionalInfo}
+          open={openSection === 'info'}
+          onToggle={() => toggle('info')}
+        >
+          <ul className="grid gap-2">
+            {copy.additionalInfo.map((item) => (
+              <ListItem key={item}>{item}</ListItem>
+            ))}
+          </ul>
+        </DetailAccordion>
+
+        <DetailAccordion
+          title={labels.termsConditions}
+          open={openSection === 'terms'}
+          onToggle={() => toggle('terms')}
+        >
+          <ul className="grid gap-2">
+            {copy.terms.map((item) => (
+              <ListItem key={item}>{item}</ListItem>
+            ))}
+          </ul>
+          <p className="mt-4 border-t border-line pt-4 text-sm text-muted">
+            {labels.groupBookingNote}
+          </p>
+        </DetailAccordion>
+      </section>
     </div>
   )
 }

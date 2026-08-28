@@ -43,6 +43,13 @@ export const packageMeta: Record<
 
 export const packageIds = Object.keys(packageMeta) as PackageId[]
 
+/** Hero image per package detail page */
+export const packageHeroImages: Record<PackageId, string> = {
+  'north-ubud': foto2,
+  'south-ubud': foto5,
+  beach: foto7,
+}
+
 export const comboMeta = {
   id: 'combo-rafting',
   price: '675.000',

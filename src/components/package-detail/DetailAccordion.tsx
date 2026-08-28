@@ -3,39 +3,35 @@ import type { ReactNode } from 'react'
 type DetailAccordionProps = {
   title: string
   children: ReactNode
-  defaultOpen?: boolean
-  className?: string
+  open: boolean
+  onToggle: () => void
 }
 
 export function DetailAccordion({
   title,
   children,
-  defaultOpen = true,
-  className = '',
+  open,
+  onToggle,
 }: DetailAccordionProps) {
   return (
-    <details
-      open={defaultOpen}
-      className={`group rounded-xl border-2 border-river-bright/70 bg-white shadow-sm ${className}`}
-    >
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-display text-lg font-semibold text-accent marker:content-none [&::-webkit-details-marker]:hidden">
-        {title}
+    <div className="border border-line bg-white">
+      <button
+        type="button"
+        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-display text-lg font-semibold text-forest"
+        aria-expanded={open}
+        onClick={onToggle}
+      >
+        <span>{title}</span>
         <span
-          className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent transition group-open:rotate-180"
+          className={`shrink-0 text-xl font-normal text-river transition ${open ? 'rotate-45' : ''}`}
           aria-hidden="true"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path
-              d="M3 5.5L7 9.5L11 5.5"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          +
         </span>
-      </summary>
-      <div className="border-t border-river-bright/30 px-5 py-4">{children}</div>
-    </details>
+      </button>
+      {open ? (
+        <div className="border-t border-line px-5 py-5 text-muted">{children}</div>
+      ) : null}
+    </div>
   )
 }

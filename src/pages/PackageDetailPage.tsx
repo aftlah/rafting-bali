@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { PackageDetailSections } from '../components/package-detail/PackageDetailSections'
+import { Seo } from '../components/Seo'
 import {
   packageHeroImages,
   packageMeta,
@@ -8,6 +9,8 @@ import {
   type PackageId,
 } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
+import { getPackageSeo } from '../seo/pageMeta'
+import { breadcrumbSchema, touristTripSchema } from '../seo/schemas'
 import { btnPrimary, section } from '../lib/styles'
 
 const ids: PackageId[] = ['north-ubud', 'south-ubud', 'beach']
@@ -19,25 +22,41 @@ function isPackageId(id: string | undefined): id is PackageId {
 export function PackageDetailPage() {
   const { id } = useParams()
   const { t, lang } = useLanguage()
+  const packageId = isPackageId(id) ? id : null
+
+  const pkg = packageId ? t.packages.items[packageId] : null
+  const seoMeta = packageId ? getPackageSeo(packageId, lang) : null
+
+  const jsonLd = useMemo(() => {
+    if (!packageId || !pkg) return []
+    return [
+      touristTripSchema(packageId, pkg.title, pkg.longDescription),
+      breadcrumbSchema([
+        { name: 'Home', path: '/' },
+        { name: t.nav.packages, path: '/' },
+        { name: pkg.title, path: `/packages/${packageId}` },
+      ]),
+    ]
+  }, [packageId, pkg, t.nav.packages])
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [id])
 
-  if (!isPackageId(id)) {
+  if (!packageId || !pkg || !seoMeta) {
     return <Navigate to="/#packages" replace />
   }
 
-  const meta = packageMeta[id]
-  const pkg = t.packages.items[id]
+  const meta = packageMeta[packageId]
   const d = t.detail
 
   return (
     <main className="overflow-x-hidden bg-foam pt-[4.25rem]">
+      <Seo meta={seoMeta} jsonLd={jsonLd} />
       <section className="relative overflow-hidden text-white">
         <img
-          src={packageHeroImages[id]}
-          alt=""
+          src={packageHeroImages[packageId]}
+          alt={`${pkg.title} — ATV quad bike tour in Bali`}
           className="absolute inset-0 size-full max-w-none object-cover"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,36,32,0.5)_0%,rgba(10,36,32,0.92)_100%)]" />
@@ -78,7 +97,7 @@ export function PackageDetailPage() {
 
       <section className={`${section} bg-white`}>
         <div className="container-site w-full max-w-4xl">
-          <PackageDetailSections packageId={id} includes={pkg.includes} />
+          <PackageDetailSections packageId={packageId} includes={pkg.includes} />
         </div>
       </section>
 

@@ -55,7 +55,7 @@ export const comboMeta = {
   price: '675.000',
 } as const
 
-export type GalleryCategory = 'atv' | 'trail' | 'beach'
+export type GalleryCategory = 'atv' | 'trail'
 
 export type GalleryItem = {
   src: string
@@ -79,8 +79,8 @@ export const images = {
     { src: foto4, category: 'trail' },
     { src: foto5, category: 'atv' },
     { src: foto6, category: 'trail' },
-    { src: foto7, category: 'beach' },
-    { src: foto8, category: 'beach' },
+    { src: foto7, category: 'atv' },
+    { src: foto8, category: 'trail' },
     { src: foto9, category: 'atv' },
   ] satisfies GalleryItem[],
 }

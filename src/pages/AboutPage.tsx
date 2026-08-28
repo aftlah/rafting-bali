@@ -1,12 +1,27 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { images, waLink } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import { btnPrimary, section, sectionTitle } from '../lib/styles'
+import { Seo } from '../components/Seo'
+import { aboutSeo } from '../seo/pageMeta'
+import { breadcrumbSchema, organizationSchema } from '../seo/schemas'
 
 export function AboutPage() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const a = t.about
+  const meta = aboutSeo[lang]
+
+  const jsonLd = useMemo(
+    () => [
+      organizationSchema(),
+      breadcrumbSchema([
+        { name: 'Home', path: '/' },
+        { name: a.title, path: '/about' },
+      ]),
+    ],
+    [a.title],
+  )
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -14,10 +29,11 @@ export function AboutPage() {
 
   return (
     <main className="bg-foam pt-[4.25rem]">
+      <Seo meta={meta} jsonLd={jsonLd} />
       <section className="relative overflow-hidden text-white">
         <img
           src={images.about}
-          alt=""
+          alt="Wild ATV Bali team and ATV safety gear at Ubud base"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-forest/75" />

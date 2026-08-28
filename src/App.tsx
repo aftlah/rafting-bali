@@ -1,6 +1,7 @@
 import { useLayoutEffect } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { Analytics } from './components/Analytics'
+import { DefaultSeoTags } from './components/Seo'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { WhatsAppFloat } from './components/WhatsAppFloat'
@@ -28,6 +29,7 @@ function App() {
   return (
     <LanguageProvider>
       <BrowserRouter>
+        <DefaultSeoTags />
         <Analytics />
         <ScrollToHash />
         <Header />

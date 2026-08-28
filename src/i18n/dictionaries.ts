@@ -87,7 +87,6 @@ export type Dictionary = {
       all: string
       atv: string
       trail: string
-      beach: string
     }
     close: string
     prev: string
@@ -394,13 +393,12 @@ export const dictionaries: Record<Lang, Dictionary> = {
     },
     gallery: {
       title: 'On the trail',
-      lead: 'Moments from Ubud trails and beach rides — replace placeholders with your own shoot.',
+      lead: 'Real moments from our Ubud ATV trails and muddy rides.',
       alt: 'Wild ATV Bali gallery',
       filters: {
         all: 'All',
         atv: 'ATV',
         trail: 'Trail',
-        beach: 'Beach',
       },
       close: 'Close',
       prev: 'Previous photo',
@@ -749,13 +747,12 @@ export const dictionaries: Record<Lang, Dictionary> = {
     },
     gallery: {
       title: 'Di jalur',
-      lead: 'Momen dari jalur Ubud dan pantai — ganti placeholder dengan foto asli Anda.',
+      lead: 'Momen nyata dari jalur ATV Ubud dan riding berlumpur kami.',
       alt: 'Galeri Wild ATV Bali',
       filters: {
         all: 'Semua',
         atv: 'ATV',
         trail: 'Jalur',
-        beach: 'Pantai',
       },
       close: 'Tutup',
       prev: 'Foto sebelumnya',

@@ -18,7 +18,6 @@ export function Gallery() {
     { id: 'all', label: t.gallery.filters.all },
     { id: 'atv', label: t.gallery.filters.atv },
     { id: 'trail', label: t.gallery.filters.trail },
-    { id: 'beach', label: t.gallery.filters.beach },
   ]
 
   const items = useMemo(
@@ -94,7 +93,7 @@ export function Gallery() {
             >
               <img
                 src={item.src}
-                alt={`${t.gallery.alt} ${i + 1}`}
+                alt={`Bali ATV ${item.category} tour — Wild ATV Bali photo ${i + 1}`}
                 loading="lazy"
                 width={1200}
                 height={900}

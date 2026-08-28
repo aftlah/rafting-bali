@@ -11,89 +11,73 @@ import type { PackageId } from '../../data/site'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { packageDetailContent } from '../../i18n/packageDetailContent'
 import { sectionTitle } from '../../lib/styles'
-import { DetailAccordion } from './DetailAccordion'
+import {
+  buildBeachPriceRows,
+  buildUbudPriceRows,
+  PackagePricingTable,
+} from './PackagePricingTable'
 
 type PackageDetailSectionsProps = {
   packageId: PackageId
   includes: string[]
 }
 
-type AccordionId = 'pickup' | 'itinerary' | 'bring' | 'info' | 'terms'
+type ScheduleTab = 'pickup' | 'itinerary'
+type TripTab = string
 
 function ListItem({ children }: { children: ReactNode }) {
   return (
-    <li className="relative pl-[1.1rem] before:absolute before:top-2 before:left-0 before:size-1.5 before:rounded-full before:bg-river-bright">
+    <li className="relative pl-[1.1rem] text-sm before:absolute before:top-2 before:left-0 before:size-1.5 before:rounded-full before:bg-river-bright">
       {children}
     </li>
   )
 }
 
-function PriceTier({
-  label,
-  single,
-  tandem,
-  labels,
+function TabButton({
+  active,
+  onClick,
+  children,
 }: {
-  label: string
-  single: string
-  tandem: string
-  labels: (typeof packageDetailContent)['en']['labels']
+  active: boolean
+  onClick: () => void
+  children: ReactNode
 }) {
   return (
-    <div className="border border-line bg-foam/50 p-5">
-      <h3 className="text-[0.8rem] font-bold tracking-wider text-river uppercase">
-        {label}
-      </h3>
-      <dl className="mt-4 grid gap-4 sm:grid-cols-2">
-        <div>
-          <dt className="text-xs font-semibold text-muted">{labels.single}</dt>
-          <dd className="mt-1 font-display text-xl font-semibold text-forest">
-            IDR {single}
-            <span className="text-sm font-sans font-normal text-muted">
-              {labels.perPerson}
-            </span>
-          </dd>
-        </div>
-        <div>
-          <dt className="text-xs font-semibold text-muted">{labels.tandem}</dt>
-          <dd className="mt-1 font-display text-xl font-semibold text-forest">
-            IDR {tandem}
-            <span className="ml-1 text-sm font-sans font-normal text-muted">
-              {labels.twoPersons}
-            </span>
-          </dd>
-        </div>
-      </dl>
-    </div>
+    <button
+      type="button"
+      onClick={onClick}
+      className={`rounded-full px-3 py-1.5 text-xs font-semibold transition sm:px-4 sm:py-2 sm:text-sm ${
+        active
+          ? 'bg-forest text-foam'
+          : 'bg-white text-muted hover:bg-mist hover:text-forest'
+      }`}
+    >
+      {children}
+    </button>
   )
 }
 
-function PickupSchedule({
-  title,
+function PickupList({
   slots,
   areaLabels,
 }: {
-  title: string
   slots: PickupSlot[]
   areaLabels: Record<string, string>
 }) {
   return (
-    <div className="border border-line bg-foam/40">
-      <p className="border-b border-line bg-white px-4 py-3 text-sm font-bold tracking-wider text-forest uppercase">
-        {title}
-      </p>
-      <ul className="divide-y divide-line">
-        {slots.map((slot) => (
-          <li
-            key={`${title}-${slot.areaKey}`}
-            className="flex items-center justify-between gap-4 px-4 py-2.5 text-sm"
-          >
-            <span className="text-forest">{areaLabels[slot.areaKey]}</span>
-            <span className="shrink-0 font-medium text-river">{slot.time}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className="divide-y divide-line rounded-sm border border-line bg-white">
+      {slots.map((slot) => (
+        <li
+          key={slot.areaKey}
+          className="flex flex-col gap-1.5 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+        >
+          <span className="text-forest">{areaLabels[slot.areaKey]}</span>
+          <span className="w-fit shrink-0 rounded-full bg-mist px-3 py-1 text-xs font-semibold text-river">
+            {slot.time}
+          </span>
+        </li>
+      ))}
+    </ul>
   )
 }
 
@@ -105,24 +89,20 @@ function ItineraryTimeline({
   steps: { time: string; text: string }[]
 }) {
   return (
-    <div className="border border-line bg-white p-5">
-      <h3 className="font-display text-lg font-semibold text-forest">{label}</h3>
-      <ol className="mt-4 grid gap-0">
-        {steps.map((step, i) => (
+    <div>
+      <h3 className="mb-4 font-display text-lg font-semibold text-forest">
+        {label}
+      </h3>
+      <ol className="grid gap-4">
+        {steps.map((step) => (
           <li
             key={`${label}-${step.time}`}
-            className={`relative border-l-2 border-river/35 pb-5 pl-5 last:pb-0 ${
-              i === steps.length - 1 ? 'border-l-transparent' : ''
-            }`}
+            className="grid gap-3 border border-line bg-white p-4 sm:grid-cols-[7.5rem_1fr]"
           >
-            <span
-              className="absolute top-0 -left-[5px] size-2 rounded-full bg-river-bright"
-              aria-hidden="true"
-            />
-            <p className="text-xs font-bold tracking-wider text-river uppercase">
+            <p className="text-xs font-bold tracking-wider text-river uppercase sm:pt-0.5">
               {step.time}
             </p>
-            <p className="mt-1 text-sm leading-relaxed text-muted">{step.text}</p>
+            <p className="text-sm leading-relaxed text-muted">{step.text}</p>
           </li>
         ))}
       </ol>
@@ -140,176 +120,143 @@ export function PackageDetailSections({
   const pkgCopy = copy.packages[packageId]
   const ubud = isUbudPackage(packageId)
 
-  const [openSection, setOpenSection] = useState<AccordionId | null>('itinerary')
+  const tripIds = pkgCopy.schedules.map((s) => s.id)
+  const [scheduleTab, setScheduleTab] = useState<ScheduleTab>('pickup')
+  const [tripTab, setTripTab] = useState<TripTab>(tripIds[0])
 
-  const toggle = (id: AccordionId) =>
-    setOpenSection((prev) => (prev === id ? null : id))
+  const pickupSlots = ubud
+    ? ubudPickupSlots
+    : beachPickupSlots
+
+  const priceRows = ubud
+    ? buildUbudPriceRows(packageId, ubudPrices, labels)
+    : buildBeachPriceRows(beachPrices, labels)
+
+  const tableLabels = {
+    option: lang === 'en' ? 'Transfer option' : 'Opsi transfer',
+    single: labels.single,
+    tandem: labels.tandem,
+    perPerson: labels.perPerson,
+    twoPersons: labels.twoPersons,
+  }
+
+  const activePickup =
+    tripTab in pickupSlots
+      ? pickupSlots[tripTab as keyof typeof pickupSlots]
+      : pickupSlots.morning
+
+  const activeItinerary = pkgCopy.schedules.find((s) => s.id === tripTab)
 
   return (
-    <div className="grid gap-12">
-      {/* Prices */}
+    <div className="ml-5 grid gap-10 md:ml-0">
+      {/* Pricing + includes */}
       <section>
         <div className="mb-5">
           <h2 className={sectionTitle}>{labels.pricesTitle}</h2>
           <p className="mt-2 text-sm text-muted">{labels.minPersons}</p>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-          {ubud ? (
-            <>
-              <PriceTier
-                label={labels.withoutTransfer}
-                single={ubudPrices[packageId].withoutTransfer.single}
-                tandem={ubudPrices[packageId].withoutTransfer.tandem}
-                labels={labels}
-              />
-              <PriceTier
-                label={labels.withUbudTransfer}
-                single={ubudPrices[packageId].withUbudTransfer.single}
-                tandem={ubudPrices[packageId].withUbudTransfer.tandem}
-                labels={labels}
-              />
-              <PriceTier
-                label={labels.withOutsideUbudTransfer}
-                single={ubudPrices[packageId].withOutsideUbudTransfer.single}
-                tandem={ubudPrices[packageId].withOutsideUbudTransfer.tandem}
-                labels={labels}
-              />
-            </>
-          ) : (
-            <>
-              <PriceTier
-                label={labels.withCangguTransfer}
-                single={beachPrices.withCangguTransfer.single}
-                tandem={beachPrices.withCangguTransfer.tandem}
-                labels={labels}
-              />
-              <PriceTier
-                label={labels.withOutsideCangguTransfer}
-                single={beachPrices.withOutsideCangguTransfer.single}
-                tandem={beachPrices.withOutsideCangguTransfer.tandem}
-                labels={labels}
-              />
-            </>
-          )}
-        </div>
-        {ubud ? (
-          <p className="mt-4 text-sm text-muted">
-            <span className="font-semibold text-forest">*</span> {labels.transferNote}
-          </p>
-        ) : null}
+        <PackagePricingTable
+          rows={priceRows}
+          labels={tableLabels}
+          footnote={ubud ? labels.transferNote : undefined}
+        />
       </section>
 
-      {/* Included */}
-      <section className="border border-line bg-white p-6 md:p-8">
+      <section className="border border-line bg-white p-4 md:p-8">
         <h2 className={sectionTitle}>{labels.includedTitle}</h2>
-        <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+        <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
           {includes.map((item) => (
             <ListItem key={item}>{item}</ListItem>
           ))}
         </ul>
       </section>
 
-      {/* Accordions */}
-      <section className="grid gap-2">
-        <DetailAccordion
-          title={labels.pickUpTime}
-          open={openSection === 'pickup'}
-          onToggle={() => toggle('pickup')}
-        >
-          <div
-            className={`grid gap-4 ${
-              ubud ? 'md:grid-cols-2' : 'md:grid-cols-2 xl:grid-cols-3'
-            }`}
+      {/* Schedule */}
+      <section>
+        <h2 className={sectionTitle}>
+          {lang === 'en' ? 'Schedule' : 'Jadwal'}
+        </h2>
+        <div className="mt-5 flex flex-wrap gap-2">
+          <TabButton
+            active={scheduleTab === 'pickup'}
+            onClick={() => setScheduleTab('pickup')}
           >
-            {ubud ? (
-              <>
-                <PickupSchedule
-                  title={labels.morningTrip}
-                  slots={ubudPickupSlots.morning}
-                  areaLabels={copy.pickupAreas}
-                />
-                <PickupSchedule
-                  title={labels.afternoonTrip}
-                  slots={ubudPickupSlots.afternoon}
-                  areaLabels={copy.pickupAreas}
-                />
-              </>
-            ) : (
-              <>
-                <PickupSchedule
-                  title={labels.morningTrip}
-                  slots={beachPickupSlots.morning}
-                  areaLabels={copy.pickupAreas}
-                />
-                <PickupSchedule
-                  title={labels.afternoonTrip}
-                  slots={beachPickupSlots.afternoon}
-                  areaLabels={copy.pickupAreas}
-                />
-                <PickupSchedule
-                  title={labels.sunsetTrip}
-                  slots={beachPickupSlots.sunset}
-                  areaLabels={copy.pickupAreas}
-                />
-              </>
-            )}
-          </div>
-        </DetailAccordion>
+            {labels.pickUpTime}
+          </TabButton>
+          <TabButton
+            active={scheduleTab === 'itinerary'}
+            onClick={() => setScheduleTab('itinerary')}
+          >
+            {labels.itinerary}
+          </TabButton>
+        </div>
 
-        <DetailAccordion
-          title={labels.itinerary}
-          open={openSection === 'itinerary'}
-          onToggle={() => toggle('itinerary')}
-        >
-          <div className="grid gap-4 lg:grid-cols-2">
-            {pkgCopy.schedules.map((schedule) => (
-              <ItineraryTimeline
-                key={schedule.id}
-                label={schedule.label}
-                steps={schedule.steps}
-              />
-            ))}
-          </div>
-        </DetailAccordion>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {tripIds.map((id) => {
+            const schedule = pkgCopy.schedules.find((s) => s.id === id)
+            if (!schedule) return null
+            return (
+              <TabButton
+                key={id}
+                active={tripTab === id}
+                onClick={() => setTripTab(id)}
+              >
+                {schedule.label}
+              </TabButton>
+            )
+          })}
+        </div>
 
-        <DetailAccordion
-          title={labels.whatToBring}
-          open={openSection === 'bring'}
-          onToggle={() => toggle('bring')}
-        >
-          <ul className="grid gap-2 sm:grid-cols-2">
+        <div className="mt-5">
+          {scheduleTab === 'pickup' ? (
+            <PickupList
+              slots={activePickup}
+              areaLabels={copy.pickupAreas}
+            />
+          ) : activeItinerary ? (
+            <ItineraryTimeline
+              label={activeItinerary.label}
+              steps={activeItinerary.steps}
+            />
+          ) : null}
+        </div>
+      </section>
+
+      {/* Good to know */}
+      <section className="grid gap-4 md:grid-cols-3">
+        <div className="border border-line bg-white p-5 md:col-span-1">
+          <h3 className="font-display text-lg font-semibold text-forest">
+            {labels.whatToBring}
+          </h3>
+          <ul className="mt-4 grid gap-2">
             {copy.whatToBring.map((item) => (
               <ListItem key={item}>{item}</ListItem>
             ))}
           </ul>
-        </DetailAccordion>
-
-        <DetailAccordion
-          title={labels.additionalInfo}
-          open={openSection === 'info'}
-          onToggle={() => toggle('info')}
-        >
-          <ul className="grid gap-2">
+        </div>
+        <div className="border border-line bg-white p-5 md:col-span-1">
+          <h3 className="font-display text-lg font-semibold text-forest">
+            {labels.additionalInfo}
+          </h3>
+          <ul className="mt-4 grid gap-2">
             {copy.additionalInfo.map((item) => (
               <ListItem key={item}>{item}</ListItem>
             ))}
           </ul>
-        </DetailAccordion>
-
-        <DetailAccordion
-          title={labels.termsConditions}
-          open={openSection === 'terms'}
-          onToggle={() => toggle('terms')}
-        >
-          <ul className="grid gap-2">
+        </div>
+        <div className="border border-line bg-white p-5 md:col-span-1">
+          <h3 className="font-display text-lg font-semibold text-forest">
+            {labels.termsConditions}
+          </h3>
+          <ul className="mt-4 grid gap-2">
             {copy.terms.map((item) => (
               <ListItem key={item}>{item}</ListItem>
             ))}
           </ul>
-          <p className="mt-4 border-t border-line pt-4 text-sm text-muted">
+          <p className="mt-4 border-t border-line pt-4 text-xs leading-relaxed text-muted">
             {labels.groupBookingNote}
           </p>
-        </DetailAccordion>
+        </div>
       </section>
     </div>
   )

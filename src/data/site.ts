@@ -1,3 +1,13 @@
+import foto1 from '../assets/foto-atv/foto1.jpg'
+import foto2 from '../assets/foto-atv/52159384-4d8a-4ac3-bde5-e554bda7ebed.jfif'
+import foto3 from '../assets/foto-atv/23169026-6012-4a14-8819-c74905e94466.jfif'
+import foto4 from '../assets/foto-atv/95c378c0-de56-40e2-929d-4e063c7877e4.jfif'
+import foto5 from '../assets/foto-atv/f73c8a69-de23-4a21-a222-f489686d3aca.jfif'
+import foto6 from '../assets/foto-atv/042d5b82-8053-4394-8974-7fdd9939bedf.jfif'
+import foto7 from '../assets/foto-atv/c517e504-5c3b-4834-90b1-e10ff5877960.jfif'
+import foto8 from '../assets/foto-atv/07d9a9a9-c824-4382-8455-0a99219dd21e.jfif'
+import foto9 from '../assets/foto-atv/0dbb40d1-7b70-4272-a644-1200ea407291.jfif'
+
 export const WHATSAPP = '6285737292988'
 export const PHONE_DISPLAY = '+62 857-3729-2988'
 export const PHONE_ALT: string = ''
@@ -45,45 +55,19 @@ export type GalleryItem = {
   category: GalleryCategory
 }
 
-/** Placeholder ATV imagery — replace with client photos before launch */
 export const images = {
-  hero: 'https://images.unsplash.com/photo-1496521061024-90e1c1221555?auto=format&fit=crop&w=2400&q=80',
-  combo:
-    'https://images.unsplash.com/photo-1582959746698-660400376dd6?auto=format&fit=crop&w=1600&q=80',
-  about:
-    'https://images.unsplash.com/photo-1507621320306-87a4aac1816c?auto=format&fit=crop&w=1600&q=80',
+  hero: foto1,
+  combo: foto3,
+  about: foto2,
   gallery: [
-    {
-      src: 'https://images.unsplash.com/photo-1496521061024-90e1c1221555?auto=format&fit=crop&w=1200&q=80',
-      category: 'atv',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1507621320306-87a4aac1816c?auto=format&fit=crop&w=1200&q=80',
-      category: 'atv',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1582959746698-660400376dd6?auto=format&fit=crop&w=1200&q=80',
-      category: 'trail',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1612118756064-5403ff7747de?auto=format&fit=crop&w=1200&q=80',
-      category: 'trail',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1713472850797-96ef549ba6af?auto=format&fit=crop&w=1200&q=80',
-      category: 'trail',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1721343431343-1a0241c07a2f?auto=format&fit=crop&w=1200&q=80',
-      category: 'beach',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1734410117891-bd6b5c61177e?auto=format&fit=crop&w=1200&q=80',
-      category: 'beach',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1506408334286-246f3e68526c?auto=format&fit=crop&w=1200&q=80',
-      category: 'atv',
-    },
+    { src: foto1, category: 'atv' },
+    { src: foto2, category: 'atv' },
+    { src: foto3, category: 'trail' },
+    { src: foto4, category: 'trail' },
+    { src: foto5, category: 'atv' },
+    { src: foto6, category: 'trail' },
+    { src: foto7, category: 'beach' },
+    { src: foto8, category: 'beach' },
+    { src: foto9, category: 'atv' },
   ] satisfies GalleryItem[],
 }

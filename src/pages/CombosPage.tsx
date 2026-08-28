@@ -7,7 +7,6 @@ import { comboContent } from '../i18n/comboContent'
 import { getCombosSeo } from '../seo/pageMeta'
 import { breadcrumbSchema } from '../seo/schemas'
 import {
-  btnOutline,
   btnPrimary,
   section,
   sectionHead,
@@ -106,10 +105,7 @@ export function CombosPage() {
               ? 'Questions about combo tours?'
               : 'Ada pertanyaan tentang tur combo?'}
           </p>
-          <a
-            className={`${btnOutline} mt-5 border-foam/30 text-foam hover:bg-white/10`}
-            href="/#contact"
-          >
+          <a className={`${btnPrimary} mt-5`} href="/#contact">
             {lang === 'en' ? 'Contact us' : 'Hubungi kami'}
           </a>
         </div>

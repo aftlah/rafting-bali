@@ -51,6 +51,7 @@ export type Dictionary = {
       blurb: string
       message: string
       ask: string
+      viewDetails: string
     }
   }
   detail: {
@@ -354,6 +355,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
         message:
           'Hi! I want to book the Combo Bali ATV Quad Bike and Ayung White Water Rafting with Wild ATV Bali (from IDR 675.000).',
         ask: 'Ask about the combo',
+        viewDetails: 'View details',
       },
     },
     detail: {
@@ -708,6 +710,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
         message:
           'Halo! Saya ingin booking Combo Bali ATV Quad Bike dan Ayung White Water Rafting di Wild ATV Bali (mulai IDR 675.000).',
         ask: 'Tanya tentang combo',
+        viewDetails: 'Lihat detail',
       },
     },
     detail: {

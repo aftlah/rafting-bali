@@ -7,6 +7,8 @@ import { Header } from './components/Header'
 import { WhatsAppFloat } from './components/WhatsAppFloat'
 import { LanguageProvider } from './i18n/LanguageContext'
 import { AboutPage } from './pages/AboutPage'
+import { ComboDetailPage } from './pages/ComboDetailPage'
+import { CombosPage } from './pages/CombosPage'
 import { HomePage } from './pages/HomePage'
 import { PackageDetailPage } from './pages/PackageDetailPage'
 
@@ -36,6 +38,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/packages/:id" element={<PackageDetailPage />} />
+          <Route path="/combos" element={<CombosPage />} />
+          <Route path="/combos/:id" element={<ComboDetailPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>
         <Footer />

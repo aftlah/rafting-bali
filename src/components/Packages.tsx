@@ -3,6 +3,7 @@ import { comboMeta, images, packageIds, packageMeta, waLink } from '../data/site
 import { useLanguage } from '../i18n/LanguageContext'
 import {
   btnDark,
+  btnGhost,
   btnOutline,
   btnPrimary,
   section,
@@ -124,14 +125,19 @@ export function Packages() {
             <p className="my-4 text-[1.15rem]">
               {t.packages.from} <strong>IDR {comboMeta.price}</strong>
             </p>
-            <a
-              className={btnDark}
-              href={waLink(t.packages.combo.message)}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {t.packages.combo.ask}
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <Link className={btnDark} to="/combos">
+                {t.packages.combo.viewDetails}
+              </Link>
+              <a
+                className={btnGhost}
+                href={waLink(t.packages.combo.message)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t.packages.combo.ask}
+              </a>
+            </div>
           </div>
         </aside>
       </div>

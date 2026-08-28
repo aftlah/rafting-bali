@@ -4,9 +4,13 @@ import { join } from 'node:path'
 const paths = [
   '/',
   '/about',
+  '/combos',
   '/packages/north-ubud',
   '/packages/south-ubud',
   '/packages/beach',
+  '/combos/south-rafting',
+  '/combos/north-rafting',
+  '/combos/batur-jeep-north',
 ]
 
 function loadSiteUrl() {

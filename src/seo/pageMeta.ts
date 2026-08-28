@@ -1,6 +1,8 @@
 import type { Lang } from '../i18n/dictionaries'
 import type { PackageId } from '../data/site'
+import type { ComboId } from '../data/combos'
 import { packageIds } from '../data/site'
+import { comboIds } from '../data/combos'
 
 export type PageSeo = {
   title: string
@@ -124,8 +126,100 @@ export function getPackageSeo(id: PackageId, lang: Lang): PageSeo {
   return { ...meta, path: `/packages/${id}` }
 }
 
+const comboSeoEn: Record<ComboId, Omit<PageSeo, 'path'>> = {
+  'south-rafting': {
+    title: 'South Ubud ATV + Ayung Rafting Combo — From IDR 675.000',
+    description:
+      'Combo South Ubud ATV and Ayung white water rafting: 1.5h quad bike + 2h rafting, private transfer, Indonesian lunch, gear & insurance. Book via WhatsApp.',
+    keywords:
+      'ATV rafting combo Bali, South Ubud ATV rafting, Ayung rafting combo, combo ATV Bali, harga combo ATV rafting',
+    image: '/images/hero.webp',
+    ogType: 'article',
+  },
+  'north-rafting': {
+    title: 'North Ubud ATV + Ayung Rafting Combo — From IDR 825.000',
+    description:
+      'Combo North Ubud ATV and Ayung rafting tour: jungle trails, 2-hour rafting, lunch, hotel transfer & safety gear included. Full-day Bali adventure.',
+    keywords:
+      'North Ubud ATV rafting, combo ATV North Ubud, Ayung rafting Bali, ATV arung jeram combo',
+    image: '/images/hero.webp',
+    ogType: 'article',
+  },
+  'batur-jeep-north': {
+    title: 'Mt Batur Jeep Sunrise + North Ubud ATV — From IDR 1.080.000',
+    description:
+      'Combo Mount Batur jeep sunrise and North Ubud ATV: Kintamani sunrise, light breakfast, 1.5h quad bike, lunch & private transfer. Book Bali combo tour.',
+    keywords:
+      'Batur jeep sunrise ATV, combo Gunung Batur ATV, jeep sunrise Bali ATV, North Ubud combo tour',
+    image: '/images/hero.webp',
+    ogType: 'article',
+  },
+}
+
+const comboSeoId: Record<ComboId, Omit<PageSeo, 'path'>> = {
+  'south-rafting': {
+    title: 'Combo ATV South Ubud + Arung Jeram Ayung — Mulai IDR 675.000',
+    description:
+      'Combo ATV South Ubud dan arung jeram Ayung: ATV 1,5 jam + rafting 2 jam, transfer privat, makan Indonesia, gear & asuransi. Booking via WhatsApp.',
+    keywords:
+      'combo ATV rafting Bali, ATV South Ubud arung jeram, combo ATV Ayung, harga combo ATV rafting',
+    image: '/images/hero.webp',
+    ogType: 'article',
+  },
+  'north-rafting': {
+    title: 'Combo ATV North Ubud + Arung Jeram Ayung — Mulai IDR 825.000',
+    description:
+      'Combo ATV North Ubud dan arung jeram Ayung: jalur hutan, rafting 2 jam, makan siang, transfer hotel & safety gear. Petualangan Bali seharian.',
+    keywords:
+      'ATV North Ubud arung jeram, combo ATV North Ubud, rafting Ayung Bali, combo ATV arung jeram',
+    image: '/images/hero.webp',
+    ogType: 'article',
+  },
+  'batur-jeep-north': {
+    title: 'Jeep Sunrise Gunung Batur + ATV North Ubud — Mulai IDR 1.080.000',
+    description:
+      'Combo jeep sunrise Gunung Batur dan ATV North Ubud: sunrise Kintamani, sarapan ringan, ATV 1,5 jam, makan siang & transfer privat.',
+    keywords:
+      'jeep sunrise Batur ATV, combo Gunung Batur ATV, jeep sunrise Bali ATV, combo tur North Ubud',
+    image: '/images/hero.webp',
+    ogType: 'article',
+  },
+}
+
+export const combosHubSeo: Record<Lang, PageSeo> = {
+  en: {
+    title: 'ATV Combo Tours Bali — Rafting & Jeep Sunrise | Wild ATV Bali',
+    description:
+      'Book Bali ATV combo tours: South/North Ubud + Ayung rafting from IDR 675.000, or Mt Batur jeep sunrise + ATV. Private transfer, lunch & gear included.',
+    keywords:
+      'ATV combo Bali, rafting combo Ubud, jeep sunrise ATV Bali, combo tour Bali, Wild ATV Bali combo',
+    path: '/combos',
+    image: '/images/hero.webp',
+  },
+  id: {
+    title: 'Tur Combo ATV Bali — Arung Jeram & Jeep Sunrise | Wild ATV Bali',
+    description:
+      'Booking tur combo ATV Bali: South/North Ubud + arung jeram Ayung mulai IDR 675.000, atau jeep sunrise Gunung Batur + ATV. Termasuk transfer, makan siang & gear.',
+    keywords:
+      'combo ATV Bali, combo arung jeram Ubud, jeep sunrise ATV Bali, tur combo Bali',
+    path: '/combos',
+    image: '/images/hero.webp',
+  },
+}
+
+export function getCombosSeo(lang: Lang): PageSeo {
+  return combosHubSeo[lang]
+}
+
+export function getComboSeo(id: ComboId, lang: Lang): PageSeo {
+  const meta = lang === 'en' ? comboSeoEn[id] : comboSeoId[id]
+  return { ...meta, path: `/combos/${id}` }
+}
+
 export const sitemapPaths = [
   '/',
   '/about',
+  '/combos',
   ...packageIds.map((id) => `/packages/${id}`),
+  ...comboIds.map((id) => `/combos/${id}`),
 ]

@@ -25,10 +25,13 @@
 
 var SHEET_NAME = 'Reviews'
 var HEADERS = ['Timestamp', 'Name', 'Place', 'Text', 'Rating', 'Status', 'Lang']
+var STATUS_OPTIONS = ['pending', 'approved', 'rejected']
 
 function doGet() {
   try {
     var sheet = getSheet_()
+    ensureStatusDropdown_(sheet)
+
     var rows = sheet.getDataRange().getValues()
     if (rows.length < 2) {
       return json_({ ok: true, reviews: [] })
@@ -78,6 +81,8 @@ function doPost(e) {
     }
 
     var sheet = getSheet_()
+    ensureStatusDropdown_(sheet)
+
     sheet.appendRow([
       new Date().toISOString(),
       name,
@@ -104,6 +109,17 @@ function getSheet_() {
     sheet.appendRow(HEADERS)
   }
   return sheet
+}
+
+/** Pasang dropdown Status di F2:F1000 agar baris baru ikut punya dropdown */
+function ensureStatusDropdown_(sheet) {
+  var range = sheet.getRange('F2:F1000')
+  var rule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(STATUS_OPTIONS, true)
+    .setAllowInvalid(false)
+    .setHelpText('Pilih: pending / approved / rejected')
+    .build()
+  range.setDataValidation(rule)
 }
 
 function parseBody_(e) {

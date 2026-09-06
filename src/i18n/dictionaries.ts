@@ -534,7 +534,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       notConfigured:
         'Review form is not connected yet. Please set VITE_REVIEWS_SCRIPT_URL after Google Sheets setup.',
       loading: 'Loading reviews…',
-      empty: 'No published reviews yet. Approved reviews from the spreadsheet will show here.',
+      empty: 'Be the first to share your ATV experience.',
     },
     faq: {
       title: 'Frequently asked questions',
@@ -910,8 +910,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       notConfigured:
         'Form testimoni belum terhubung. Isi VITE_REVIEWS_SCRIPT_URL setelah setup Google Sheets.',
       loading: 'Memuat testimoni…',
-      empty:
-        'Belum ada testimoni yang dipublish. Data approved dari spreadsheet akan muncul di sini.',
+      empty: 'Jadilah yang pertama membagikan pengalaman ATV Anda.',
     },
     faq: {
       title: 'Pertanyaan yang sering diajukan',

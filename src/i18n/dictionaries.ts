@@ -115,6 +115,23 @@ export type Dictionary = {
     title: string
     lead: string
     items: { name: string; place: string; text: string }[]
+    formTitle: string
+    formLead: string
+    name: string
+    namePh: string
+    place: string
+    placePh: string
+    rating: string
+    text: string
+    textPh: string
+    submit: string
+    submitting: string
+    success: string
+    error: string
+    pendingNote: string
+    notConfigured: string
+    loading: string
+    empty: string
   }
   faq: {
     title: string
@@ -499,6 +516,25 @@ export const dictionaries: Record<Lang, Dictionary> = {
           text: 'We did the beach ATV and it felt totally different from the jungle. Highly recommend.',
         },
       ],
+      formTitle: 'Share your experience',
+      formLead:
+        'Leave a short review after your ride. We publish selected testimonials on this page.',
+      name: 'Your name',
+      namePh: 'Emma',
+      place: 'Country / city',
+      placePh: 'UK',
+      rating: 'Rating',
+      text: 'Your review',
+      textPh: 'Tell others what you enjoyed…',
+      submit: 'Submit review',
+      submitting: 'Sending…',
+      success: 'Thank you! Your review was received and will appear after we approve it.',
+      error: 'Could not send your review. Please try again or contact us on WhatsApp.',
+      pendingNote: 'Reviews appear on the website after we approve them.',
+      notConfigured:
+        'Review form is not connected yet. Please set VITE_REVIEWS_SCRIPT_URL after Google Sheets setup.',
+      loading: 'Loading reviews…',
+      empty: 'No published reviews yet. Approved reviews from the spreadsheet will show here.',
     },
     faq: {
       title: 'Frequently asked questions',
@@ -854,6 +890,28 @@ export const dictionaries: Record<Lang, Dictionary> = {
           text: 'Kami coba ATV pantai dan rasanya beda dari jungle. Sangat direkomendasikan.',
         },
       ],
+      formTitle: 'Bagikan pengalaman Anda',
+      formLead:
+        'Tulis ulasan singkat setelah riding. Kami akan menampilkan testimoni terpilih di halaman ini.',
+      name: 'Nama Anda',
+      namePh: 'Emma',
+      place: 'Negara / kota',
+      placePh: 'Indonesia',
+      rating: 'Rating',
+      text: 'Testimoni Anda',
+      textPh: 'Ceritakan apa yang paling berkesan…',
+      submit: 'Kirim testimoni',
+      submitting: 'Mengirim…',
+      success:
+        'Terima kasih! Testimoni Anda sudah diterima dan akan muncul setelah kami setujui.',
+      error:
+        'Gagal mengirim testimoni. Coba lagi atau hubungi kami via WhatsApp.',
+      pendingNote: 'Testimoni tampil di website setelah kami setujui.',
+      notConfigured:
+        'Form testimoni belum terhubung. Isi VITE_REVIEWS_SCRIPT_URL setelah setup Google Sheets.',
+      loading: 'Memuat testimoni…',
+      empty:
+        'Belum ada testimoni yang dipublish. Data approved dari spreadsheet akan muncul di sini.',
     },
     faq: {
       title: 'Pertanyaan yang sering diajukan',
